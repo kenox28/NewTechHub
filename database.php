@@ -1,9 +1,9 @@
 <?php
 
-$host = "192.168.1.6:3306";
-$dbusername = "marba";
-$dbpassword = "password";
-$dbname = "javas";
+$host = "localhost";
+$dbusername = "root";
+$dbpassword = "";
+$dbname = "progbook";
 
 $connect = mysqli_connect($host, $dbusername, $dbpassword, $dbname);
 
