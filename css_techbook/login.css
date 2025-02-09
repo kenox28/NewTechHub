@@ -1,0 +1,707 @@
+* {
+	padding: 0;
+	margin: 0;
+	color: rgb(255, 255, 255);
+	font-family: sans-serif;
+	font-weight: 600;
+}
+body {
+	display: flex;
+	align-items: center;
+	height: 700px;
+	flex-wrap: wrap;
+	justify-content: center;
+	/* background-color: #212121; */
+	background-image: linear-gradient(
+		to left bottom,
+		#383838,
+		#494d56,
+		#526576,
+		#538093,
+		#509caa,
+		#59adb5,
+		#64bdbf,
+		#72cec7,
+		#83d7d1,
+		#94e1db,
+		#a4eae5,
+		#b4f4ef
+	);
+	gap: 100px;
+	width: 100%;
+}
+#box1 {
+	height: 600px;
+	width: 900px;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background-image: url("../profileimage/techhubBLACK.png");
+	background-size: 700px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+h1 {
+	font-size: 3.8rem;
+	color: #000000;
+	width: 390px;
+}
+
+#box2 {
+	height: 600px;
+	width: 400px;
+	border-radius: 10px;
+	/* background: rgba(22, 26, 23, 0.35); */
+	/* backdrop-filter: blur(160px); */
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+form {
+	/* background-image: linear-gradient(
+		to right bottom,
+		#ffffff,
+		#e6e8ec,
+		#cbd1d8,
+		#afbcc4,
+		#92a8ae,
+		#859ea2,
+		#799595,
+		#6e8b87,
+		#6e8983,
+		#6e887e,
+		#6e867a,
+		#6f8476
+	); */
+	background-color: #212121;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(15.5px);
+	-webkit-backdrop-filter: blur(15.5px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	border-radius: 10px;
+	/* border: 1px solid rgb(4, 255, 42); */
+	box-shadow: rgb(0, 0, 0) 0px 20px 30px -10px;
+	border: 1px solid rgb(0, 0, 0);
+	border-radius: 10px;
+	height: 480px;
+	width: 420px;
+	margin-bottom: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+	flex-direction: column;
+}
+
+/* #loginbtn {
+	font-size: 1.3rem;
+	font-weight: 700;
+	color: rgb(4, 255, 42);
+	border-radius: 10px;
+	background-image: linear-gradient(
+		to left bottom,
+		#768283,
+		#707b7c,
+		#6a7575,
+		#646e6f,
+		#5e6868,
+		#5d6665,
+		#5b6362,
+		#5a615f,
+		#5d6260,
+		#5f6361,
+		#626462,
+		#646564
+	);
+} */
+a {
+	height: 40px;
+	width: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	font-size: 0.9rem;
+	color: #06f63e;
+}
+hr {
+	width: 350px;
+	display: flex;
+	margin: 10px;
+	justify-content: center;
+	align-items: center;
+}
+button {
+	margin: 20px;
+	height: 55px;
+	width: 210px;
+	background-image: linear-gradient(
+		to left bottom,
+		#768283,
+		#707b7c,
+		#6a7575,
+		#646e6f,
+		#5e6868,
+		#5d6665,
+		#5b6362,
+		#5a615f,
+		#5d6260,
+		#5f6361,
+		#626462,
+		#646564
+	);
+	border-radius: 5px;
+	border: 0;
+	color: rgb(0, 0, 0);
+	font-weight: 600;
+	font-size: 1.1rem;
+}
+p {
+	color: #000000;
+}
+
+/* From Uiverse.io by mi-series */
+.btn {
+	outline: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #4e9a8e;
+	min-width: 200px;
+	border: 0;
+	height: 40px;
+	border-radius: 4px;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+		-1px -1px 6px rgba(255, 255, 255, 0.4);
+	box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 16px 20px;
+	color: #000000;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 1.2px;
+	text-transform: uppercase;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.btn:hover {
+	opacity: 0.95;
+}
+
+.btn .animation {
+	border-radius: 100%;
+	animation: ripple 0.6s linear infinite;
+}
+
+@keyframes ripple {
+	0% {
+		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1),
+			0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1),
+			0 0 0 60px rgba(255, 255, 255, 0.1);
+	}
+
+	100% {
+		box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1),
+			0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1),
+			0 0 0 80px rgba(255, 255, 255, 0);
+	}
+}
+
+#loginbtn.btn {
+	min-width: 250px; /* Wider width for login button */
+}
+/* .forgotdiv {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(22, 26, 23, 0.35);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(15.5px);
+    -webkit-backdrop-filter: blur(15.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    border: 1px solid rgb(4, 255, 42);
+    box-shadow: rgb(0, 0, 0) 0px 20px 30px -10px;
+} */
+/* label {
+	height: 150px;
+	width: 100%;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	font-size: 1.7rem;
+	font-weight: 700;
+	color: #000000;
+} */
+#divforsubmit {
+	height: 60px;
+	width: 100%;
+	border: 1px solid green;
+}
+#btnfors {
+	width: 85%;
+}
+
+#backa {
+	height: 30px;
+	width: 30px;
+}
+/* From Uiverse.io by AmIt-DasIT */
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+	position: relative;
+	color: white;
+}
+
+.container .label {
+	font-size: 15px;
+	padding-left: 10px;
+	position: absolute;
+	top: 10px;
+	transition: 0.3s;
+	pointer-events: none;
+}
+
+.input {
+	width: 200px;
+	height: 45px;
+	border: none;
+	outline: none;
+	padding: 0px 7px;
+	border-radius: 6px;
+	color: #fff;
+	font-size: 15px;
+	background-color: transparent;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+		-1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+.input:focus {
+	border: 2px solid transparent;
+	color: #fff;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+		-1px -1px 6px rgba(255, 255, 255, 0.4), inset 3px 3px 10px rgba(0, 0, 0, 1),
+		inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+.container .input:valid ~ .label,
+.container .input:focus ~ .label {
+	transition: 0.3s;
+	padding-left: 2px;
+	transform: translateY(-35px);
+}
+
+.container .input:valid,
+.container .input:focus {
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+		-1px -1px 6px rgba(255, 255, 255, 0.4), inset 3px 3px 10px rgba(0, 0, 0, 1),
+		inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+.divinput {
+	display: flex;
+	height: 150px;
+
+	width: 390px;
+	justify-content: center;
+	/* background-color: greenyellow; */
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	/* border: 1px solid green; */
+	gap: 35px;
+}
+#username {
+	width: 320px;
+}
+#passsword {
+	width: 320px;
+}
+#formforforgot {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(28, 28, 28, 0.98);
+	padding: 1.5rem; /* Reduced padding */
+	border-radius: 20px;
+	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+	width: 320px; /* Fixed smaller width */
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+}
+
+.forgot-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem; /* Reduced gap */
+}
+
+/* Header Styles */
+.forgot-header {
+	text-align: center;
+	margin-bottom: 0.5rem; /* Reduced margin */
+}
+
+.icon-wrapper {
+	width: 50px; /* Smaller icon */
+	height: 50px;
+	background: linear-gradient(135deg, #4e9a8e 0%, #3d7b71 100%);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto 1rem; /* Reduced margin */
+	box-shadow: 0 10px 20px rgba(78, 154, 142, 0.2);
+}
+
+.forgot-icon {
+	font-size: 1.5rem; /* Smaller icon */
+	color: #ffffff;
+}
+
+.forgot-header h2 {
+	color: #ffffff;
+	font-size: 1.4rem; /* Smaller font */
+	margin-bottom: 0.5rem;
+	font-weight: 600;
+}
+
+.forgot-header p {
+	color: #9ca3af;
+	font-size: 0.85rem; /* Smaller font */
+	line-height: 1.4;
+	margin: 0 auto;
+}
+
+/* Input Styles */
+.input-container {
+	position: relative;
+	margin: 1rem 0; /* Reduced margin */
+}
+
+.input-container input {
+	width: 100%;
+	padding: 0.3rem 0.4rem 0.3rem 2.5rem; /* Reduced padding */
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 10px;
+	color: #ffffff;
+	font-size: 0.9rem;
+}
+
+/* Button Styles */
+.reset-button {
+	width: 50%;
+	padding: 0; /* Reduced padding */
+	background: linear-gradient(135deg, #4e9a8e 0%, #3d7b71 100%);
+	color: #ffffff;
+	border: none;
+	border-radius: 10px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	gap: 0.5rem;
+}
+
+/* Footer Styles */
+.forgot-footer {
+	text-align: center;
+	margin-top: 0.75rem; /* Reduced margin */
+	padding-top: 0.75rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.forgot-footer p {
+	font-size: 0.8rem; /* Smaller font */
+}
+
+/* Close Button Styles */
+#forbacka {
+	position: absolute;
+	top: 0.75rem;
+	right: 0.75rem;
+}
+
+#btnforback {
+	font-size: 1rem;
+	padding: 0.3rem;
+}
+#emailforgot {
+	width: 265px;
+}
+#loginbtn.btn {
+	min-width: 250px; /* Wider width for login button */
+}
+#create.btn,
+#forgotbuton.btn {
+	min-width: 200px; /* Original width for other buttons */
+}
+.swal-overlay {
+	background-color: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(5px);
+}
+
+.swal-modal {
+	background-color: #1a1a1a;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 15px;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	padding: 24px;
+}
+
+.swal-title {
+	color: #ffffff !important;
+	font-size: 1.5rem !important;
+	font-weight: 600 !important;
+	margin: 0 0 15px 0 !important;
+	padding: 0 !important;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.swal-text {
+	color: #bdbdbd !important;
+	font-size: 1rem !important;
+	text-align: center !important;
+	line-height: 1.5 !important;
+	padding: 0 !important;
+	margin: 16px 0 !important;
+}
+/* Success Icon Styling - Modern Dark Theme */
+.swal-icon--success {
+	border-color: #2d2d2d !important; /* Dark border */
+}
+
+.swal-icon--success:before,
+.swal-icon--success:after {
+	background: #1a1a1a !important; /* Match modal background */
+}
+
+.swal-icon--success__hide-corners {
+	background-color: #1a1a1a !important; /* Match modal background */
+}
+
+.swal-icon--success__ring {
+	border: 4px solid rgba(255, 255, 255, 0.8) !important; /* White ring */
+	border-radius: 50% !important;
+}
+
+.swal-icon--success__line {
+	background-color: #00677e !important; /* Teal checkmark */
+	height: 5px !important; /* Slightly thicker line */
+}
+
+.swal-icon--success__line--tip {
+	width: 25px !important;
+	left: 14px !important;
+	top: 46px !important;
+	transform: rotate(45deg) !important;
+}
+
+.swal-icon--success__line--long {
+	width: 47px !important;
+	right: 8px !important;
+	top: 38px !important;
+	transform: rotate(-45deg) !important;
+}
+
+/* Error Icon Styling */
+.swal-icon--error {
+	border-color: #dc3545 !important;
+}
+
+.swal-icon--error__line {
+	background-color: #dc3545 !important;
+}
+
+/* Warning Icon Styling */
+.swal-icon--warning {
+	border-color: #ffc107 !important;
+}
+
+.swal-icon--warning__body,
+.swal-icon--warning__dot {
+	background-color: #ffc107 !important;
+}
+
+/* Button Styling */
+.swal-button {
+	background: linear-gradient(135deg, #00677e, #005266) !important;
+	color: #ffffff !important;
+	padding: 12px 28px !important;
+	border-radius: 8px !important;
+	font-size: 0.95rem !important;
+	font-weight: 500 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.5px !important;
+	border: none !important;
+	box-shadow: 0 4px 15px rgba(0, 103, 126, 0.3) !important;
+	transition: all 0.3s ease !important;
+}
+
+.swal-button:hover {
+	background: linear-gradient(135deg, #007991, #00677e) !important;
+	transform: translateY(-2px) !important;
+	box-shadow: 0 6px 20px rgba(0, 103, 126, 0.4) !important;
+}
+
+.swal-button:active {
+	transform: translateY(0) !important;
+}
+
+/* Different button styles for different states */
+.swal-button--confirm {
+	background: linear-gradient(135deg, #00677e, #005266) !important;
+}
+
+.swal-button--cancel {
+	background: linear-gradient(135deg, #dc3545, #c82333) !important;
+}
+
+/* Footer Styling */
+.swal-footer {
+	background-color: transparent !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+	margin-top: 20px !important;
+	padding: 20px 0 0 0 !important;
+	text-align: center !important;
+}
+
+/* Animation */
+@keyframes swal2-show {
+	0% {
+		transform: scale(0.8);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.swal-modal {
+	animation: swal2-show 0.3s ease-out;
+}
+
+/* Custom Scrollbar for Modal Content */
+.swal-modal::-webkit-scrollbar {
+	width: 8px;
+}
+
+.swal-modal::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 4px;
+}
+
+.swal-modal::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 4px;
+}
+
+.swal-modal::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+@media screen and (max-width: 768px) {
+	body {
+		height: 100vh;
+		gap: 20px;
+		padding: 20px 10px;
+	}
+
+	#box1 {
+		height: 200px; /* Reduced height for mobile */
+		width: 100%;
+		max-width: 300px; /* Control max width */
+		background-size: contain; /* Make logo responsive */
+		margin-bottom: 0;
+	}
+
+	#box2 {
+		height: auto;
+		width: 100%;
+		max-width: 350px; /* Control max width */
+	}
+
+	form {
+		width: 100%;
+		height: auto;
+		padding: 20px 10px;
+		margin-bottom: 0;
+	}
+
+	.divinput {
+		width: 100%;
+		padding: 0 15px;
+		box-sizing: border-box;
+	}
+
+	#username,
+	#passsword {
+		width: 100%;
+		max-width: 280px;
+	}
+
+	.btn {
+		width: 100%;
+		max-width: 250px;
+		height: 45px;
+		margin: 10px auto;
+	}
+
+	hr {
+		width: 90%;
+		margin: 15px auto;
+	}
+
+	/* Forgot Password Modal Adjustments */
+	#formforforgot {
+		width: 90%;
+		max-width: 300px;
+		padding: 1rem;
+	}
+
+	.forgot-content {
+		gap: 0.8rem;
+	}
+
+	#emailforgot {
+		width: 100%;
+		max-width: 250px;
+	}
+}
+
+/* Additional adjustments for very small screens */
+@media screen and (max-width: 320px) {
+	#box1 {
+		height: 150px;
+		max-width: 250px;
+	}
+
+	form {
+		padding: 15px 5px;
+	}
+
+	.btn {
+		font-size: 11px;
+		height: 40px;
+	}
+
+	.container .label {
+		font-size: 13px;
+	}
+
+	.input {
+		height: 40px;
+		font-size: 13px;
+	}
+}
