@@ -1,11 +1,11 @@
 <?php
 
-$host = "localhost";
+$hosts = "localhost";
 $dbusername = "root";
 $dbpassword = "";
 $dbname = "progbook";
 
-$connect = mysqli_connect($host, $dbusername, $dbpassword, $dbname);
+$connect = mysqli_connect($hosts, $dbusername, $dbpassword, $dbname);
 
 if (!$connect) {
     echo "failed";
