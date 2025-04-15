@@ -8,129 +8,223 @@ require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
 
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 header('Content-Type: application/json');
 
-if(isset($_POST['email'])) {
-    $email = mysqli_real_escape_string($connect, $_POST['email']);
-    
-    // Check if email exists
-    $sql = "SELECT * FROM account WHERE email = '$email'";
-    $result = mysqli_query($connect, $sql);
-    
-    if(mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $password = $row['password']; // Get the password
+// Debug logging
+error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
+error_log("Content Type: " . $_SERVER['CONTENT_TYPE']);
+error_log("POST Data: " . print_r($_POST, true));
+error_log("FILES Data: " . print_r($_FILES, true));
+
+// Check if we're getting a POST request
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Only POST requests are allowed'
+    ]);
+    exit;
+}
+
+// Check for action parameter
+if (empty($_POST['action'])) {
+    error_log("Action parameter missing. Available POST data: " . print_r($_POST, true));
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Action parameter is required'
+    ]);
+    exit;
+}
+
+// Check for email parameter
+if (empty($_POST['email'])) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Email parameter is required'
+    ]);
+    exit;
+}
+
+$action = $_POST['action'];
+$email = mysqli_real_escape_string($connect, $_POST['email']);
+
+error_log("Processing action: " . $action . " for email: " . $email);
+
+function generateVerificationCode() {
+    return sprintf("%06d", mt_rand(0, 999999));
+}
+
+switch ($action) {
+    case 'send_code':
+        error_log("Executing send_code case");
+        $sql = "SELECT * FROM account WHERE email = ?";
+        $stmt = mysqli_prepare($connect, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
         
-        // Create PHPMailer instance
-        $mail = new PHPMailer(true);
+        if(mysqli_num_rows($result) > 0) {
+            $verificationCode = generateVerificationCode();
+            
+            // Store verification code in session
+            $_SESSION['reset_code'] = $verificationCode;
+            $_SESSION['reset_email'] = $email;
+            $_SESSION['reset_time'] = time();
+            
+            error_log("Generated verification code: " . $verificationCode);
+            
+            $mail = new PHPMailer(true);
+            
+            try {
+                // Server settings
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'iquenxzx@gmail.com';
+                $mail->Password = 'lews hdga hdvb glym';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->Port = 465;
+                
+                $mail->setFrom('iquenxzx@gmail.com', 'Tech Hub');
+                $mail->addAddress($email);
+                
+                $mail->isHTML(true);
+                $mail->Subject = 'Password Reset Verification Code - Tech Hub';
+                $mail->Body = "
+                    <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;'>
+                        <h2 style='color: #0A1628;'>Password Reset Verification</h2>
+                        <p>Your verification code is: <strong style='font-size: 24px; color: #60A5FA;'>$verificationCode</strong></p>
+                        <p>This code will expire in 15 minutes.</p>
+                        <p>If you didn't request this code, please ignore this email.</p>
+                    </div>";
+                
+                $mail->send();
+                error_log("Email sent successfully");
+                
+                echo json_encode([
+                    'status' => 'success',
+                    'message' => 'Verification code sent to your email'
+                ]);
+            } catch (Exception $e) {
+                error_log("Email sending failed: " . $mail->ErrorInfo);
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => "Failed to send verification code. Error: {$mail->ErrorInfo}"
+                ]);
+            }
+        } else {
+            error_log("Email not found in database: " . $email);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Email not found in our records'
+            ]);
+        }
+        break;
+
+    case 'verify_code':
+        error_log("Executing verify_code case");
+        if (!isset($_POST['verification_code'])) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Verification code is required'
+            ]);
+            exit;
+        }
         
-        try {
-            // Server settings
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'iquenxzx@gmail.com'; // Replace with your email
-            $mail->Password = 'lews hdga hdvb glym'; // Replace with your app password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port = 465;
-            
-            // Recipients
-            $mail->setFrom('iquenxzx@gmail.com', 'Tech Hub');
-            $mail->addAddress($email);
-            
-            // Content
-            $mail->isHTML(true);
-            $mail->Subject = 'Your Password Recovery - Tech Hub';
-            $mail->Body = '
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="utf-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Password Recovery - TechHub</title>
-                </head>
-                <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
-                    <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
-                        <tr>
-                            <td style="padding: 40px 30px; background-color: #0A1628;">
-                                <!-- Header -->
-                                <div style="text-align: center; margin-bottom: 30px;">
-                                    <h1 style="color: #60A5FA; margin: 0; font-size: 28px;">Password Recovery 🔐</h1>
-                                </div>
+        $submittedCode = $_POST['verification_code'];
+        
+        if (!isset($_SESSION['reset_code']) || !isset($_SESSION['reset_time']) || 
+            $_SESSION['reset_email'] !== $email) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Invalid or expired session'
+            ]);
+            exit;
+        }
+        
+        // Check if code is expired (15 minutes)
+        if (time() - $_SESSION['reset_time'] > 900) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Verification code has expired'
+            ]);
+            exit;
+        }
+        
+        if ($submittedCode === $_SESSION['reset_code']) {
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Code verified successfully'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Invalid verification code'
+            ]);
+        }
+        break;
 
-                                <!-- Message -->
-                                <div style="color: #E2E8F0; margin-bottom: 30px; font-size: 16px; text-align: center;">
-                                    We received your request for your account password. Here are your login credentials.
-                                </div>
-
-                                <!-- Credentials Box -->
-                                <div style="background-color: #1E293B; padding: 25px; border-left: 4px solid #60A5FA; margin: 25px 0; border-radius: 0 8px 8px 0;">
-                                    <div style="color: #FFFFFF; font-weight: bold; margin-bottom: 15px;">
-                                        Your Account Details:
-                                    </div>
-                                    <ul style="list-style: none; padding: 0; margin: 0; color: #E2E8F0;">
-                                        <li style="margin: 10px 0; padding-left: 20px;">→ Email: '.$email.'</li>
-                                        <li style="margin: 10px 0; padding-left: 20px;">→ Password: '.$password.'</li>
-                                    </ul>
-                                </div>
-
-                                <!-- Security Notice -->
-                                <div style="background-color: #1E293B; padding: 25px; margin: 25px 0; border-radius: 8px;">
-                                    <div style="color: #60A5FA; font-weight: bold; margin-bottom: 15px; font-size: 18px;">
-                                        Security Recommendations 🛡️
-                                    </div>
-                                    <ul style="list-style: none; padding: 0; margin: 0; color: #E2E8F0;">
-                                        <li style="margin: 10px 0; padding-left: 20px;">→ Change your password after logging in</li>
-                                        <li style="margin: 10px 0; padding-left: 20px;">→ Use a strong, unique password</li>
-                                        <li style="margin: 10px 0; padding-left: 20px;">→ Never share your credentials</li>
-                                        <li style="margin: 10px 0; padding-left: 20px;">→ Enable two-factor authentication if available</li>
-                                    </ul>
-                                </div>
-
-                                <!-- Footer -->
-                                <div style="text-align: center; margin-top: 30px; padding-top: 30px; border-top: 1px solid #2D3748; color: #E2E8F0;">
-                                    <p style="margin: 10px 0;">If you did not request this password recovery, please contact us immediately.</p>
-                                    <p style="margin: 10px 0; color: #60A5FA; font-family: monospace; font-size: 18px;">&lt; Stay Secure! /&gt;</p>
-                                    <p style="margin: 10px 0;">Best regards,<br>The TechHub Team</p>
-                                    
-                                    <!-- Social Links -->
-                                    <div style="margin: 20px 0;">
-                                        <a href="https://www.facebook.com/iquen.marba.7/l" style="color: #60A5FA; text-decoration: none; margin: 0 10px; background-color: #1E293B; padding: 8px 16px; border-radius: 4px;">Facebook</a>
-                                        <a href="https://github.com/kenox28" style="color: #60A5FA; text-decoration: none; margin: 0 10px; background-color: #1E293B; padding: 8px 16px; border-radius: 4px;">Github</a>
-                                        <a href="https://www.instagram.com/k3nek3/" style="color: #60A5FA; text-decoration: none; margin: 0 10px; background-color: #1E293B; padding: 8px 16px; border-radius: 4px;">Instagram</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </body>
-                </html>';
-            
-            $mail->send();
+    case 'reset_password':
+        error_log("Executing reset_password case");
+        if (!isset($_POST['verification_code']) || !isset($_POST['new_password'])) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Missing required parameters'
+            ]);
+            exit;
+        }
+        
+        if (!isset($_SESSION['reset_code']) || !isset($_SESSION['reset_time']) || 
+            $_SESSION['reset_email'] !== $email) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Invalid or expired session'
+            ]);
+            exit;
+        }
+        
+        $verificationCode = $_POST['verification_code'];
+        $newPassword = $_POST['new_password'];
+        
+        if ($verificationCode !== $_SESSION['reset_code']) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Invalid verification code'
+            ]);
+            exit;
+        }
+        
+        // Update password in database
+        $sql = "UPDATE account SET password = ? WHERE email = ?";
+        $stmt = mysqli_prepare($connect, $sql);
+        mysqli_stmt_bind_param($stmt, "ss", $newPassword, $email);
+        
+        if (mysqli_stmt_execute($stmt)) {
+            // Clear reset session data
+            unset($_SESSION['reset_code']);
+            unset($_SESSION['reset_email']);
+            unset($_SESSION['reset_time']);
             
             echo json_encode([
                 'status' => 'success',
-                'message' => 'Your password has been sent to your email'
+                'message' => 'Password reset successfully'
             ]);
-            
-        } catch (Exception $e) {
+        } else {
             echo json_encode([
                 'status' => 'error',
-                'message' => "Failed to send email. Error: {$mail->ErrorInfo}"
+                'message' => 'Failed to update password'
             ]);
         }
-        
-    } else {
+        break;
+
+    default:
+        error_log("Invalid action received: " . $action);
         echo json_encode([
             'status' => 'error',
-            'message' => 'Email not found in our records'
+            'message' => 'Invalid action'
         ]);
-    }
-    
-} else {
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'Email is required'
-    ]);
 }
 ?>

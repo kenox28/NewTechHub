@@ -3,6 +3,24 @@ AOS.init();
 const create = document.querySelector("#create");
 const form = document.querySelector("#formlogin");
 const btn = form.querySelector("#loginbtn");
+
+document.querySelectorAll(".btn").forEach((button) => {
+	button.addEventListener("click", function (e) {
+		let x = e.clientX - e.target.offsetLeft;
+		let y = e.clientY - e.target.offsetTop;
+
+		let ripple = document.createElement("span");
+		ripple.className = "animation";
+		ripple.style.left = x + "px";
+		ripple.style.top = y + "px";
+
+		this.appendChild(ripple);
+
+		setTimeout(() => {
+			ripple.remove();
+		}, 600);
+	});
+});
 create.onclick = function gocreate(e) {
 	e.preventDefault();
 	window.location.href = "../newDesignTechbook/createform.php";
@@ -11,35 +29,110 @@ create.onclick = function gocreate(e) {
 form.onsubmit = function sendajax(e) {
 	e.preventDefault();
 };
+
 btn.onclick = function send(e) {
+	e.preventDefault();
 	const username = document.querySelector("#username").value;
 	const passsword = document.querySelector("#passsword").value;
+	const otpSection = document.querySelector("#otpSection");
+	const otpInput = document.querySelector("#otp");
+	const passwordContainer = document.querySelector("#passsword").parentElement;
 
-	e.preventDefault();
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", "../newPhpfileTechhub/loginValidation.php", true);
-	xhr.onload = function () {
-		if (xhr.readyState === XMLHttpRequest.DONE) {
-			if (xhr.status === 200) {
-				let data = xhr.response;
-				if (data === "success") {
-					location.href = "../newDesignTechbook/home.php";
-				} else if (data === "admin") {
-					location.href = "adminhomepage.php";
-				} else {
-					// Show error message for invalid credentials
-					swal({
-						title: "Login Failed!",
-						text: "Invalid email or password. Please try again.",
-						icon: "error",
-						button: "OK",
-					});
+	// If OTP section is not visible, verify credentials and send OTP
+	if (otpSection.style.display === "none") {
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", "../newPhpfileTechhub/loginValidation.php", true);
+		xhr.onload = function () {
+			if (xhr.readyState === XMLHttpRequest.DONE) {
+				if (xhr.status === 200) {
+					try {
+						let response = JSON.parse(xhr.response);
+						if (response.status === "credentials_valid") {
+							otpSection.style.display = "block";
+							passwordContainer.style.display = "none"; // Hide password input
+							btn.innerHTML =
+								'<i class="animation"></i>VERIFY OTP<i class="animation"></i>';
+						} else {
+							swal({
+								title: "Login Failed!",
+								text:
+									response.message ||
+									"Invalid email or password. Please try again.",
+								icon: "error",
+								button: "OK",
+							});
+						}
+					} catch (e) {
+						swal({
+							title: "Error!",
+							text: "An error occurred. Please try again.",
+							icon: "error",
+							button: "OK",
+						});
+					}
 				}
 			}
+		};
+		let formData = new FormData();
+		formData.append("email", username);
+		formData.append("password", passsword);
+		formData.append("action", "verify_credentials");
+		xhr.send(formData);
+	} else {
+		if (!otpInput.value) {
+			swal({
+				title: "Error!",
+				text: "Please enter the OTP code",
+				icon: "error",
+				button: "OK",
+			});
+			return;
 		}
-	};
-	let formdatainputed = new FormData(form);
-	xhr.send(formdatainputed);
+
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", "../newPhpfileTechhub/loginValidation.php", true);
+		xhr.onload = function () {
+			if (xhr.readyState === XMLHttpRequest.DONE) {
+				if (xhr.status === 200) {
+					try {
+						let response = JSON.parse(xhr.response);
+						if (response.status === "success") {
+							if (response.role === "admin") {
+								location.href = "adminhomepage.php";
+							} else {
+								location.href = "../newDesignTechbook/home.php";
+							}
+						} else {
+							swal({
+								title: "Verification Failed!",
+								text: response.message || "Invalid OTP code. Please try again.",
+								icon: "error",
+								button: "OK",
+							});
+							// If OTP verification fails, show password input again and hide OTP section
+							otpSection.style.display = "none";
+							passwordContainer.style.display = "block";
+							btn.innerHTML =
+								'<i class="animation"></i>LOG IN<i class="animation"></i>';
+						}
+					} catch (e) {
+						swal({
+							title: "Error!",
+							text: "An error occurred. Please try again.",
+							icon: "error",
+							button: "OK",
+						});
+					}
+				}
+			}
+		};
+		let formData = new FormData();
+		formData.append("email", username);
+		formData.append("password", passsword);
+		formData.append("otp", otpInput.value);
+		formData.append("action", "verify_otp");
+		xhr.send(formData);
+	}
 };
 const forgotbuton = document.querySelector("#forgotbuton");
 const formforforgot = document.querySelector("#formforforgot");
@@ -95,8 +188,13 @@ const submitBtn = document.querySelector("#btnfors");
 formforforgot.onsubmit = function (e) {
 	e.preventDefault();
 
-	// Get email value
 	const email = emailInput.value;
+	const emailSection = document.getElementById("emailSection");
+	const verificationSection = document.querySelector("#verificationSection");
+	const newPasswordSection = document.querySelector("#newPasswordSection");
+	const verificationCode = document.querySelector("#verificationCode");
+	const newPassword = document.querySelector("#newPassword");
+	const confirmPassword = document.querySelector("#confirmPassword");
 
 	// Basic email validation
 	if (!email || !email.includes("@")) {
@@ -110,52 +208,185 @@ formforforgot.onsubmit = function (e) {
 	}
 
 	// Show loading state
-	submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 	submitBtn.disabled = true;
 
-	// Create FormData
-	let formData = new FormData();
-	formData.append("email", email);
+	// If email section is visible, send verification code
+	if (emailSection.style.display !== "none") {
+		submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-	// Send AJAX request
-	fetch("../newPhpfileTechhub/forgotpass.php", {
-		method: "POST",
-		body: formData,
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			if (data.status === "success") {
-				swal({
-					title: "Success!",
-					text: data.message,
-					icon: "success",
-					button: "OK",
-				}).then(() => {
-					formforforgot.reset();
-					hideForgotForm();
-				});
-			} else {
+		const formData = new FormData();
+		formData.append("action", "send_code");
+		formData.append("email", email);
+
+		fetch("../newPhpfileTechhub/forgotpass.php", {
+			method: "POST",
+			body: formData,
+		})
+			.then((response) => response.text())
+			.then((text) => {
+				console.log("Raw response:", text);
+				try {
+					return JSON.parse(text);
+				} catch (e) {
+					console.error("Failed to parse JSON:", text);
+					throw new Error("Server returned invalid JSON");
+				}
+			})
+			.then((data) => {
+				if (data.status === "success") {
+					emailSection.style.display = "none";
+					verificationSection.style.display = "block";
+					submitBtn.innerHTML =
+						'<span>Verify Code</span><i class="fas fa-arrow-right"></i>';
+				} else {
+					throw new Error(data.message || "Failed to send verification code");
+				}
+			})
+			.catch((error) => {
+				console.error("Error details:", error);
 				swal({
 					title: "Error!",
-					text: data.message || "An error occurred",
+					text: error.message || "An error occurred",
 					icon: "error",
 					button: "OK",
 				});
-			}
-		})
-		.catch((error) => {
-			console.error("Error:", error);
+			})
+			.finally(() => {
+				submitBtn.disabled = false;
+			});
+	}
+	// If verification section is visible, verify code
+	else if (verificationSection.style.display !== "none") {
+		if (!verificationCode.value) {
 			swal({
 				title: "Error!",
-				text: "An error occurred while processing your request",
+				text: "Please enter the verification code",
 				icon: "error",
 				button: "OK",
 			});
+			return;
+		}
+
+		submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+
+		const formData = new FormData();
+		formData.append("action", "verify_code");
+		formData.append("email", email);
+		formData.append("verification_code", verificationCode.value);
+
+		fetch("../newPhpfileTechhub/forgotpass.php", {
+			method: "POST",
+			body: formData,
 		})
-		.finally(() => {
-			// Reset button state
-			submitBtn.innerHTML =
-				'<span>Send Password</span><i class="fas fa-arrow-right"></i>';
-			submitBtn.disabled = false;
-		});
+			.then((response) => response.text())
+			.then((text) => {
+				console.log("Raw response:", text);
+				try {
+					return JSON.parse(text);
+				} catch (e) {
+					console.error("Failed to parse JSON:", text);
+					throw new Error("Server returned invalid JSON");
+				}
+			})
+			.then((data) => {
+				if (data.status === "success") {
+					verificationSection.style.display = "none";
+					newPasswordSection.style.display = "block";
+					submitBtn.innerHTML =
+						'<span>Reset Password</span><i class="fas fa-arrow-right"></i>';
+				} else {
+					throw new Error(data.message);
+				}
+			})
+			.catch((error) => {
+				swal({
+					title: "Error!",
+					text: error.message || "Invalid verification code",
+					icon: "error",
+					button: "OK",
+				});
+			})
+			.finally(() => {
+				submitBtn.disabled = false;
+			});
+	}
+	// If password section is visible, reset password
+	else if (newPasswordSection.style.display !== "none") {
+		if (!newPassword.value || !confirmPassword.value) {
+			swal({
+				title: "Error!",
+				text: "Please fill in both password fields",
+				icon: "error",
+				button: "OK",
+			});
+			return;
+		}
+
+		if (newPassword.value !== confirmPassword.value) {
+			swal({
+				title: "Error!",
+				text: "Passwords do not match",
+				icon: "error",
+				button: "OK",
+			});
+			return;
+		}
+
+		submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resetting...';
+
+		const formData = new FormData();
+		formData.append("action", "reset_password");
+		formData.append("email", email);
+		formData.append("verification_code", verificationCode.value);
+		formData.append("new_password", newPassword.value);
+
+		fetch("../newPhpfileTechhub/forgotpass.php", {
+			method: "POST",
+			body: formData,
+		})
+			.then((response) => response.text())
+			.then((text) => {
+				console.log("Raw response:", text);
+				try {
+					return JSON.parse(text);
+				} catch (e) {
+					console.error("Failed to parse JSON:", text);
+					throw new Error("Server returned invalid JSON");
+				}
+			})
+			.then((data) => {
+				if (data.status === "success") {
+					swal({
+						title: "Success!",
+						text: "Your password has been reset successfully",
+						icon: "success",
+						button: "OK",
+					}).then(() => {
+						// Reset form and hide it
+						formforforgot.reset();
+						hideForgotForm();
+
+						// Reset all sections to their initial state
+						emailSection.style.display = "block";
+						verificationSection.style.display = "none";
+						newPasswordSection.style.display = "none";
+						submitBtn.innerHTML =
+							'<span>Send Code</span><i class="fas fa-arrow-right"></i>';
+					});
+				} else {
+					throw new Error(data.message);
+				}
+			})
+			.catch((error) => {
+				swal({
+					title: "Error!",
+					text: error.message || "Failed to reset password",
+					icon: "error",
+					button: "OK",
+				});
+			})
+			.finally(() => {
+				submitBtn.disabled = false;
+			});
+	}
 };

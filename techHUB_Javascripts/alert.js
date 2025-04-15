@@ -1,7 +1,6 @@
 const login = document.querySelector("#login");
 const logForm = document.querySelector("#logForm");
-
-// to display error if wrong or taken
+const otpSendContent = document.querySelector("#OTPSend-content");
 
 // Initially disable the submit button
 login.disabled = true;
@@ -45,6 +44,17 @@ login.onclick = function (e) {
 								text: data.message,
 								icon: "error",
 								button: "Try Again",
+							});
+							break;
+
+						case "otp_sent":
+							// Show the OTP input section
+							otpSendContent.style.display = "block";
+							swal({
+								title: "OTP Sent!",
+								text: "Please check your email for the OTP.",
+								icon: "success",
+								button: "OK",
 							});
 							break;
 
@@ -107,6 +117,37 @@ login.onclick = function (e) {
 	xhr.send(formdatainputed);
 };
 
+// OTP verification logic
+document.querySelector("#verifyOTP").onclick = function () {
+	const otpValue = document.querySelector("#OTP").value;
+
+	// Send OTP for verification
+	let otpXhr = new XMLHttpRequest();
+	otpXhr.open("POST", "../newPhpfileTechhub/createacc.php", true);
+	otpXhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	otpXhr.onload = function () {
+		let otpData = JSON.parse(otpXhr.responseText);
+		if (otpData.status === "error") {
+			swal({
+				title: "Error!",
+				text: otpData.message,
+				icon: "error",
+				button: "OK",
+			});
+		} else if (otpData.status === "success") {
+			swal({
+				title: "Success!",
+				text: otpData.message,
+				icon: "success",
+				button: "Continue",
+			}).then(() => {
+				window.location.href = "../newDesignTechbook/createform.php";
+			});
+		}
+	};
+	otpXhr.send(`OTP=${otpValue}`);
+};
+
 // Functions for reCAPTCHA
 function enablesubmit() {
 	login.disabled = false;
@@ -115,3 +156,7 @@ function enablesubmit() {
 function recaptchaExpired() {
 	login.disabled = true;
 }
+
+document.querySelector("#close-icon").onclick = function () {
+	otpSendContent.style.display = "none";
+};

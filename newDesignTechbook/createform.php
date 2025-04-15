@@ -18,7 +18,7 @@ if (isset($_SESSION['userid'])) {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Create Account</title>
 		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-		<link rel="stylesheet" href="../css_techbook/create1.css?v=1.0.4" />
+		<link rel="stylesheet" href="../css_techbook/create1.css?v=1.0.5" />
 	</head>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
@@ -136,10 +136,16 @@ if (isset($_SESSION['userid'])) {
 					<label for="golog">Already have an account?</label>
 					<a href="login.php" id="golog">Login</a>
 				</div>
-			</form>
+			</form> 
+		</div>
+		<div id="OTPSend-content" style="display: none;">
+			<span id="close-icon" style="cursor: pointer; position: absolute; top: 10px; right: 10px; font-size: 20px; color: #ffffff;">&times;</span>
+			<h1 id="OTP-title">Email Verification</h1>
+			<input type="text" id="OTP" name="OTP" placeholder="Enter OTP" />
+			<button id="verifyOTP">Verify OTP</button>
 		</div>
 
-		<script src="../techHUB_Javascripts/alert.js?v=1.0.2"></script>
+		<script src="../techHUB_Javascripts/alert.js?v=1.0.1"></script>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	</body>
