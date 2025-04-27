@@ -8,6 +8,125 @@ formreport.onsubmit = function (e) {
 	e.preventDefault();
 };
 
+async function Addpost() {
+	const form = document.getElementById("postfeed");
+	const formdata = new FormData(form);
+
+	const res = await fetch("../newphpfiletechhub/postcode.php", {
+		method: "POST",
+		body: formdata,
+	});
+
+	const result = await res.json();
+
+	if (result.status === "success") {
+		swal("Success!", result.message, "success");
+		showpost();
+	} else {
+		swal("Error!", result.message, "error");
+	}
+}
+
+document.getElementById("postfeed").addEventListener("submit", function (e) {
+	e.preventDefault();
+	Addpost();
+});
+
+async function showpost() {
+	// e.preventDefault();
+	try {
+		const res = await fetch("../newphpfiletechhub/showallPOST.php");
+		const data = await res.json();
+		let posts = "";
+		for (let i = 0; i < data.length; i++) {
+			const u = data[i];
+			posts += `
+                <div id="allpost">
+                    <div class="feedname">
+                        <img src="../profileimage/${
+													u.img1
+												}" alt="" class="homeprofile" />
+                        <h1 id="Postname">${u.fname} ${u.lname}</h1>
+                    </div>
+                    <div class="Postcaption">
+                        <p id="Postcaption">${u.cappost}</p>
+                    </div>${
+											u.imgpost
+												? `<div class="postpic">
+						<img src="../profileimage/${u.imgpost}" alt="" id="postpic" />
+                    </div>`
+												: ""
+										}
+                    <div class="like-section">
+                        <button onclick="reactPost(${u.id}, 'up')" 
+                                type="button" 
+                                id="upbtn_${u.id}"
+                                class="vote-btn ${u.upvoted ? "voted" : ""}">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                        </button>
+                        <button onclick="reactPost(${u.id}, 'down')" 
+                                type="button" 
+                                id="downbtn_${u.id}"
+                                class="vote-btn ${u.downvoted ? "voted" : ""}">
+                            <i class="fa-regular fa-thumbs-down"></i>
+                        </button>
+                        <p id="likes_${u.id}" class="vote-count">Votes: ${
+				u.react
+			}</p>
+                    </div>
+                </div>
+            `;
+		}
+		document.getElementById("allPOST").innerHTML = posts;
+	} catch (error) {
+		console.error("Error fetching posts:", error);
+	}
+}
+showpost();
+function reactPost(postId, voteType = "up") {
+	const buttonId = (voteType === "up" ? "upbtn_" : "downbtn_") + postId;
+	const button = document.getElementById(buttonId);
+
+	// Prevent the user from voting more than once
+	if (button.classList.contains("voted")) {
+		return;
+	}
+
+	// Disable the buttons to prevent further clicks
+	document.getElementById("upbtn_" + postId).classList.add("disabled");
+	document.getElementById("downbtn_" + postId).classList.add("disabled");
+
+	fetch("../newPhpfileTechhub/likes.php", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		body: `postid=${postId}&vote=${voteType}`,
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			if (data.success) {
+				document.getElementById("likes_" + postId).innerHTML =
+					"Votes: " + data.newCount;
+
+				button.classList.add("voted");
+
+				if (voteType === "up") {
+					document
+						.getElementById("upbtn_" + postId)
+						.querySelector("i").style.color = "#2ecc71"; // green
+				} else {
+					document
+						.getElementById("downbtn_" + postId)
+						.querySelector("i").style.color = "#e74c3c"; // red
+				}
+			} else {
+				console.error("Error: " + data.message);
+			}
+		})
+		.catch((error) => console.error("Error:", error));
+}
+
 btnforreports.onclick = function (e) {
 	e.preventDefault();
 
@@ -77,44 +196,6 @@ search.onkeyup = function (e) {
 	xhr1.send("searchterm=" + encodeURIComponent(searchinputed));
 };
 
-// Post code functionality
-const btnPost = document.querySelector("#captbtn");
-const postForm = document.querySelector("#postfeed");
-
-postForm.onsubmit = function (e) {
-	e.preventDefault();
-};
-
-btnPost.onclick = function (e) {
-	e.preventDefault();
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", "../newPhpfileTechhub/postcode.php", true);
-
-	xhr.onload = function () {
-		if (xhr.readyState === XMLHttpRequest.DONE) {
-			if (xhr.status === 200) {
-				try {
-					const response = JSON.parse(xhr.response);
-					if (response.status === "success") {
-						swal("Success!", response.message, "success").then(() => {
-							location.reload();
-						});
-					} else {
-						swal("Error!", response.message, "error");
-					}
-				} catch (e) {
-					console.error("Error parsing response:", e);
-					swal("Error!", "Something went wrong!", "error");
-				}
-			}
-		}
-	};
-
-	let formdatainputed = new FormData(postForm);
-	xhr.send(formdatainputed);
-};
-
-// Logout functionality
 const logout = document.querySelector("#logout");
 logout.onclick = function (e) {
 	console.log("run");

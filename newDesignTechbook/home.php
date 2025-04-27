@@ -46,11 +46,6 @@ header("Access-Control-Allow-Origin: *");
         <header>
             <?php include "../newPhpfileTechhub/headerfetechdata.php"?>
             <h1 id="logo"><img src="../profileimage/techhubBLACK.png" height="40px" style="padding: 2px;"></h1>
-                    <!-- Add search toggle button -->
-            <!-- <div id="search-toggle">
-                <i class="fas fa-search"></i>
-            </div> -->
-
             <div id="listheader2">
                 <form action="">        
                     <div class="container">
@@ -166,7 +161,7 @@ header("Access-Control-Allow-Origin: *");
                 <?php include "../newPhpfileTechhub/sideranksforuser.php"?>
                 </div>
             </div>
-            <div class="box1" data-aos="fade-up" data-aos-duration="1000">
+            <div class="box1" id="PostContainer" data-aos="fade-up" data-aos-duration="1000">
             <form action="#" class="postfeed" id="postfeed" enctype="multipart/form-data">
                 <div class="container">
                     <input
@@ -191,8 +186,7 @@ header("Access-Control-Allow-Origin: *");
                 <!-- <button id="captbtn" type="submit"><i class="fa-solid fa-thumbtack"></i></button> -->
             </form>
 
-                <?php include "../newPhpfileTechhub/showallPOST.php"?>
-                
+             <div id="allPOST"></div>   
 
 
             </div>

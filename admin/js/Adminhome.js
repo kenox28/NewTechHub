@@ -39,7 +39,6 @@ async function loadUsers() {
 	}
 	document.getElementById("userTableBody").innerHTML = rows;
 }
-
 async function loadPost() {
 	const res = await fetch("../php/post.php");
 	const data = await res.json();
@@ -48,7 +47,9 @@ async function loadPost() {
 		const u = data[i];
 		rows += `<div id="allpost" class="bg-white rounded-lg shadow-md overflow-hidden mb-4">
             <div class="feedname flex items-center p-4 border-b border-gray-200">
-                <img src="../../profileimage/${u.img1}" alt="" class="homeprofile w-10 h-10 rounded-full object-cover mr-3" />
+                <img src="../../profileimage/${
+									u.img1
+								}" alt="" class="homeprofile w-10 h-10 rounded-full object-cover mr-3" />
                 <h1 id="Postname" class="font-semibold">
                     ${u.fname} ${u.lname}
                 </h1>
@@ -59,21 +60,75 @@ async function loadPost() {
                 </p>
             </div>
             <div class="postpic">
-                <img src="../../profileimage/${u.imgpost}" alt="" id="postpic" class="w-full h-auto" />
+                <img src="../../profileimage/${
+									u.imgpost
+								}" alt="" id="postpic" class="w-full h-auto" />
             </div>
             <div class="flex items-center p-4 border-t border-gray-200">
-                <button class="flex items-center mr-4 text-gray-600 hover:text-blue-500">
+                <button onclick="reactPost(${u.id}, 'up')" 
+                        type="button" 
+                        id="upbtn_${u.id}" 
+                        class="flex items-center mr-4 text-gray-600 hover:text-blue-500 vote-btn ${
+													u.upvoted ? "voted" : ""
+												}">
                     <i class="far fa-thumbs-up mr-1"></i>
                     <span>Like</span>
                 </button>
-                <button class="flex items-center text-gray-600 hover:text-red-500">
+                <button onclick="reactPost(${u.id}, 'down')" 
+                        type="button" 
+                        id="downbtn_${u.id}" 
+                        class="flex items-center text-gray-600 hover:text-red-500 vote-btn ${
+													u.downvoted ? "voted" : ""
+												}">
                     <i class="far fa-thumbs-down mr-1"></i>
                     <span>Dislike</span>
                 </button>
+                <p id="likes_${u.id}" class="vote-count ml-4">Votes: ${
+			u.react
+		}</p>
             </div>
         </div>`;
 	}
 	document.getElementById("POST").innerHTML = rows;
+}
+
+function reactPost(postId, voteType = "up") {
+	const buttonId = (voteType === "up" ? "upbtn_" : "downbtn_") + postId;
+	const button = document.getElementById(buttonId);
+
+	if (button.classList.contains("voted")) {
+		return;
+	}
+
+	document.getElementById("upbtn_" + postId).classList.add("disabled");
+	document.getElementById("downbtn_" + postId).classList.add("disabled");
+
+	fetch("../php/likes.php", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		body: `postid=${postId}&vote=${voteType}`,
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			if (data.success) {
+				document.getElementById("likes_" + postId).innerHTML =
+					"Votes: " + data.newCount;
+				button.classList.add("voted");
+
+				if (voteType === "up") {
+					document
+						.getElementById("upbtn_" + postId)
+						.querySelector("i").style.color = "#2ecc71"; // green
+				} else {
+					document
+						.getElementById("downbtn_" + postId)
+						.querySelector("i").style.color = "#e74c3c"; // red
+				}
+			}
+		})
+		.catch((error) => console.error("Error:", error));
 }
 
 async function loadRanks() {
