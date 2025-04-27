@@ -28,93 +28,8 @@ if (!isset($_SESSION['userid'])) {
     </head>
 
     <body>
-    <!-- <header>
-            <h1 id="logo">progbook</h1>
-            <div id="listheader2">
-                <form action="">
-                    <input
-                        type="text"
-                        name="searchterm"
-                        class=""
-                        id="searchbar"
-                        placeholder="Search..."/>
-                </form>
-                <div class="search3" id="serc">
 
-                </div>
-            </div>
-            <div id="listheader1">
-                <a href="1.php"><i class="fa fa-house"></i></a>
-                <a href="8.php?userid=<?php echo $_SESSION['userid']; ?>"><i class="fa-regular fa-envelope"></i></a>
-                <a href="5.php"><i class="fa-solid fa-user-tie"></i></a>
-            </div>
-            <div id="idprodiv">
-                <?php include "header.php"?>
-
-                <a href="#" id="profile">
-                    <img src="profileimage/<?php echo $userCname['img'] ?>" alt="" id="homeprofile" />
-                </a>
-
-                <div id="divshow">
-                    <a href="22.php?userid=<?php echo $_SESSION['userid']; ?>" class="a"><i class="fa-solid fa-user"></i><p class="pa">PROFILE</p></a>
-                    <a href="3f.php" class="a"><i class="fa-solid fa-address-card"></i><p class="pa">EDIT PROFILE</p></a>
-                    <a href="#" id="showrepordiv" class="a"><i class="fa-solid fa-message"></i><p class="pa">REPORT</p></a>
-
-                    <a href="" class="a"><i class="fa-regular fa-circle-question"></i><p class="pa">INFO</p></a>
-                    <a href="#" class="a" id="logout"><i class="fa-solid fa-right-from-bracket"></i><p class="pa">LOGOUT</p></a>
-                </div>
-            </div>
-        </header> -->
-        <header>
-            <h1 id="logo"><img src="../profileimage/techhubBLACK.png" height="40px" style="padding: 2px;"></h1>
-            <div id="listheader2">
-                <form action="">
-                    <div class="container">
-                        <input
-                        required = ""
-                        type="text"
-                        name="searchterm"
-                        class="input"
-                        id="searchbar"
-                        placeholder="Search"/>
-                        <!-- <label class="label">Search</label> -->
-                    </div>
-                    <!-- <input
-                        type="text"
-                        name="searchterm"
-                        class="input"
-                        id="searchbar"
-                        placeholder="Search..."/> -->
-                </form>
-                <div class="search3" id="serc">
-
-                </div>
-            </div>
-            <div id="listheader1">
-                <a href="home.php"  title="Home"><i class="fa fa-house"></i></a>
-                <a href="message.php?userid=<?php echo $_SESSION['userid']; ?>" title="Messages"><i class="fa-regular fa-envelope"></i></a>
-                <a href="Leaderboards.php" title="Leaderboards"><i class="fa-solid fa-user-tie"></i></a>
-                <a href="TopPost.php" id="toppost" title="Top Posts"><i class="fa-solid fa-chart-column"></i></a>
-                <a href="NewsApi.php" id="news" title="News"><i class="fa-solid fa-newspaper"></i></a>
-
-            </div>
-            <div id="idprodiv">
-                <?php include "../newPhpfileTechhub/headerfetechdata.php"?>
-
-                <a href="#" id="profile">
-                    <img  src="../profileimage/<?php echo $userCname['img'] ?>" alt="" id="homeprofile" />
-                </a>
-
-                <div id="divshow">
-                    <a href="profilepage.php?userid=<?php echo $_SESSION['userid']; ?>" class="a"><i class="fa-solid fa-user"></i><p class="pa">PROFILE</p></a>
-                    <a href="EditProfilepage.php?userid=<?php echo $_SESSION['userid']; ?>" class="a"><i class="fa-solid fa-address-card"></i><p class="pa">EDIT PROFILE</p></a>
-                    <a href="#" id="showrepordiv" class="a"><i class="fa-solid fa-message"></i><p class="pa">REPORT</p></a>
-                    <a href="#" class="a" id="feedbackdiv"><i class="fa-regular fa-circle-question"></i><p class="pa">FEEDBACK</p></a>
-
-                    <a href="#" class="a" id="logout"><i class="fa-solid fa-right-from-bracket"></i><p class="pa">LOGOUT</p></a>
-                </div>
-            </div>
-        </header>
+        <?php include "header.php"?>
         <main>
             <div id="reportmessage">
                     <div id="btnforx">
@@ -229,5 +144,5 @@ if (!isset($_SESSION['userid'])) {
     </body>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="../techHUB_Javascripts/message.js?v=1.0.2"></script>
+    <script src="../techHUB_Javascripts/message.js?v=1.0.1"></script>
 </html>

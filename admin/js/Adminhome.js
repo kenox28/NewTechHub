@@ -96,14 +96,16 @@ function reactPost(postId, voteType = "up") {
 	const buttonId = (voteType === "up" ? "upbtn_" : "downbtn_") + postId;
 	const button = document.getElementById(buttonId);
 
+	// Prevent the user from voting more than once
 	if (button.classList.contains("voted")) {
 		return;
 	}
 
+	// Disable the buttons to prevent further clicks
 	document.getElementById("upbtn_" + postId).classList.add("disabled");
 	document.getElementById("downbtn_" + postId).classList.add("disabled");
 
-	fetch("../php/likes.php", {
+	fetch("../../../newPhpfileTechhub/likes.php", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded",
@@ -115,6 +117,7 @@ function reactPost(postId, voteType = "up") {
 			if (data.success) {
 				document.getElementById("likes_" + postId).innerHTML =
 					"Votes: " + data.newCount;
+
 				button.classList.add("voted");
 
 				if (voteType === "up") {
@@ -126,6 +129,8 @@ function reactPost(postId, voteType = "up") {
 						.getElementById("downbtn_" + postId)
 						.querySelector("i").style.color = "#e74c3c"; // red
 				}
+			} else {
+				console.error("Error: " + data.message);
 			}
 		})
 		.catch((error) => console.error("Error:", error));

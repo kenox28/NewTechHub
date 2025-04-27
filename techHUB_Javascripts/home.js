@@ -127,7 +127,7 @@ function reactPost(postId, voteType = "up") {
 		.catch((error) => console.error("Error:", error));
 }
 
-btnforreports.onclick = function (e) {
+btnforreports.onclick = async function (e) {
 	e.preventDefault();
 
 	if (chatadmin === "") {
@@ -164,7 +164,6 @@ btnforreports.onclick = function (e) {
 	}
 };
 
-// Search functionality
 let search = document.querySelector("#searchbar");
 let search3 = document.querySelector(".search3");
 let divActive = document.querySelector(".divActive");
