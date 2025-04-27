@@ -274,3 +274,17 @@ document.addEventListener("DOMContentLoaded", function () {
 		searchHeader.classList.remove("search-active");
 	});
 });
+document.addEventListener("DOMContentLoaded", function () {
+	const gameBtn = document.getElementById("sidebtnGameid");
+	const gameDiv = document.getElementById("GameDiv");
+	const closeBtn = document.getElementById("closeGameDiv");
+
+	gameBtn.addEventListener("click", function (e) {
+		e.preventDefault();
+		gameDiv.style.display = "block";
+	});
+
+	closeBtn.addEventListener("click", function () {
+		gameDiv.style.display = "none";
+	});
+});

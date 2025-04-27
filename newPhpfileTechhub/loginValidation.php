@@ -13,7 +13,7 @@ header('Content-Type: application/json');
 if (!isset($_POST['action'])) {
     echo json_encode([
         'status' => 'error',
-        'message' => 'Action is required'
+        'message' => 'Action is required' . $_POST['action']
     ]);
     exit;
 }

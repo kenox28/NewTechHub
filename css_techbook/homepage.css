@@ -2250,3 +2250,10 @@ input::placeholder {
 	background: rgba(255, 255, 255, 0.2);
 }
 /* Existing styles remain the same until media queries */
+/* #GameDiv {
+	border: 1px solid #ccc;
+	padding: 10px;
+	position: absolute;
+	background-color: #04e92a;
+	z-index: 1;
+} */

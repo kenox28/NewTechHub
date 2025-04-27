@@ -4,8 +4,8 @@ session_start();
 if (!isset($_SESSION['userid'])) {
     header("location:login.php");
     exit();
-
 }
+header("Access-Control-Allow-Origin: *");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,10 +23,26 @@ if (!isset($_SESSION['userid'])) {
             integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer" />
+            
     </head>
     <link rel="html" href="home.html">
 
     <body>
+            <section id="GameDiv" style="display: none; border: 1px solid #ccc; padding: 10px; position: absolute; height: 90vh; width:98.5%; z-index:1; top:11%; background-color:green;">
+                <button id="closeGameDiv" style="position: absolute; top: 5px; right: 10px;">✖</button>
+                <div class="main">
+                    <div class="main-menu">
+                        <div class="menu-nav word-manager">Word Manager</div>
+                        <div class="menu-nav quiz-manager">Quiz Manager</div>
+                        <div class="menu-nav">Account Settings</div>
+                        <a class="menu-nav logout" href="login_signup/logout.php">Logout</a>
+                    </div>
+                    <div class="main-menu-view">
+
+                    </div>
+                </div>
+            </section>
+
         <header>
             <?php include "../newPhpfileTechhub/headerfetechdata.php"?>
             <h1 id="logo"><img src="../profileimage/techhubBLACK.png" height="40px" style="padding: 2px;"></h1>
@@ -136,19 +152,20 @@ if (!isset($_SESSION['userid'])) {
                     <i id="iside" class="fa-solid fa-message"></i>
                     <i class="animation"></i>REPORT<i class="animation"></i>
                 </a>
+                <a id="sidebtnGameid" class="btn1" class="a">
+                    <i id="iside" class="fa-solid fa-address-card"></i>
+                    <i class="animation"></i>Game<i class="animation"></i>
+                </a>
+
                 
                 <button id="titledivrank" onclick="showhomeside()">
                     <h1>Top Contributor</h1>
                 </button>
                 
                 <div id="homedivside">
-                
                 <?php include "../newPhpfileTechhub/sideranksforuser.php"?>
-
-
                 </div>
             </div>
-
             <div class="box1" data-aos="fade-up" data-aos-duration="1000">
             <form action="#" class="postfeed" id="postfeed" enctype="multipart/form-data">
                 <div class="container">
@@ -180,7 +197,7 @@ if (!isset($_SESSION['userid'])) {
 
             </div>
             
-            <div class="box2"  data-aos="fade-left" data-aos-duration="1000"    >
+            <div class="box2"  data-aos="fade-left" data-aos-duration="1000">
                 <?php include "../newPhpfileTechhub/showaluser.php"?>
                 
             </div>
@@ -188,6 +205,13 @@ if (!isset($_SESSION['userid'])) {
     </body>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://c61a-158-62-51-63.ngrok-free.app/spellable/js/spellable.js?v=1.0.1"></script>
+    <script>
+        const game = new WordQuizApp()
+    </script>
+    <script src="../techHUB_Javascripts/home.js?v=1.0.1"></script>
 
-    <script src="../techHUB_Javascripts/home.js?v=1.0.2"></script>
+    
+    
+    
 </html>

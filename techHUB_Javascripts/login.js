@@ -133,6 +133,7 @@ btn.onclick = function send(e) {
 		formData.append("action", "verify_otp");
 		xhr.send(formData);
 	}
+	console.log("Raw response:", xhr.response);
 };
 const forgotbuton = document.querySelector("#forgotbuton");
 const formforforgot = document.querySelector("#formforforgot");
