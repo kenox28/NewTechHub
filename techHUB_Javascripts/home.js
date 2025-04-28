@@ -32,10 +32,27 @@ document.getElementById("postfeed").addEventListener("submit", function (e) {
 	Addpost();
 });
 
+let offset = 0; // Initialize offset
+const limit = 10; // Number of posts to fetch
+let isLoading = false; // Flag to track loading state
+
+// Assuming you have a div with the class 'box1' that contains the posts
+const box1 = document.querySelector(".box1");
+
 async function showpost() {
-	// e.preventDefault();
+	if (isLoading) return; // Prevent multiple fetch requests
+	isLoading = true; // Set loading state
+
+	// Show loading overlay
+	document.getElementById("loading").style.display = "flex"; // Show the spinner
+
+	// Introduce a 2-second delay before fetching posts
+	await new Promise((resolve) => setTimeout(resolve, 2000));
+
 	try {
-		const res = await fetch("../newphpfiletechhub/showallPOST.php");
+		const res = await fetch(
+			`../newPhpfiletechhub/showallPOST.php?offset=${offset}&limit=${limit}`
+		);
 		const data = await res.json();
 		let posts = "";
 		for (let i = 0; i < data.length; i++) {
@@ -52,22 +69,22 @@ async function showpost() {
                         <p id="Postcaption">${u.cappost}</p>
                     </div>${
 											u.imgpost
-												? `<div class="postpic">
-						<img src="../profileimage/${u.imgpost}" alt="" id="postpic" />
-                    </div>`
+												? `<div class="postpic"><img src="../profileimage/${u.imgpost}" alt="" id="postpic" /></div>`
 												: ""
 										}
                     <div class="like-section">
-                        <button onclick="reactPost(${u.id}, 'up')" 
-                                type="button" 
-                                id="upbtn_${u.id}"
-                                class="vote-btn ${u.upvoted ? "voted" : ""}">
+                        <button onclick="reactPost(${
+													u.id
+												}, 'up')" type="button" id="upbtn_${
+				u.id
+			}" class="vote-btn ${u.upvoted ? "voted" : ""}">
                             <i class="fa-regular fa-thumbs-up"></i>
                         </button>
-                        <button onclick="reactPost(${u.id}, 'down')" 
-                                type="button" 
-                                id="downbtn_${u.id}"
-                                class="vote-btn ${u.downvoted ? "voted" : ""}">
+                        <button onclick="reactPost(${
+													u.id
+												}, 'down')" type="button" id="downbtn_${
+				u.id
+			}" class="vote-btn ${u.downvoted ? "voted" : ""}">
                             <i class="fa-regular fa-thumbs-down"></i>
                         </button>
                         <p id="likes_${u.id}" class="vote-count">Votes: ${
@@ -75,14 +92,30 @@ async function showpost() {
 			}</p>
                     </div>
                 </div>
-            `;
+            
+				`;
 		}
-		document.getElementById("allPOST").innerHTML = posts;
+		document.getElementById("allPOST").innerHTML += posts; // Append new posts
+		offset += limit; // Update offset for next fetch
 	} catch (error) {
 		console.error("Error fetching posts:", error);
+	} finally {
+		// Hide loading overlay
+		document.getElementById("loading").style.display = "none"; // Hide the spinner
+		isLoading = false; // Reset loading state
 	}
 }
+
+// Load initial posts
 showpost();
+
+// Add scroll event listener to the box1 div
+box1.addEventListener("scroll", () => {
+	if (box1.scrollTop + box1.clientHeight >= box1.scrollHeight - 100) {
+		showpost(); // Fetch more posts when near the bottom of the box1 div
+	}
+});
+
 function reactPost(postId, voteType = "up") {
 	const buttonId = (voteType === "up" ? "upbtn_" : "downbtn_") + postId;
 	const button = document.getElementById(buttonId);
