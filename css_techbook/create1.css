@@ -38,16 +38,7 @@ body {
 	width: 500px;
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	/* background: rgba(22, 26, 23, 0.35);
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	backdrop-filter: blur(15.5px);
-	-webkit-backdrop-filter: blur(15.5px);
 	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.18); */
-	border-radius: 10px;
-	/* border: 1px solid rgb(4, 255, 42); */
-	/* box-shadow: rgb(0, 0, 0) 0px 20px 30px -10px; */
 }
 
 #box2 {
@@ -56,15 +47,6 @@ body {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	/* background: rgba(22, 26, 23, 0.35);
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	backdrop-filter: blur(15.5px);
-	-webkit-backdrop-filter: blur(15.5px);
-	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
-	border-radius: 10px; */
-	/* border: 1px solid rgb(4, 255, 42); */
-	/* box-shadow: rgb(0, 0, 0) 0px 20px 30px -10px; */
 	flex-wrap: wrap;
 	background-image: url("../profileimage/techhubBLACK.png");
 	background-size: 700px;
@@ -113,7 +95,7 @@ header {
 	z-index: 2;
 }
 form {
-	height: 600px;
+	height: 650px;
 	display: flex;
 	align-items: center;
 	justify-content: center;

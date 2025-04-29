@@ -28,7 +28,7 @@ if (isset($_SESSION['userid'])) {
 			emailjs.init("DvupqWcqhjzEECjbx"); // Replace with your actual public key
 		})();
 	</script> -->
-	<body>
+	<body class="min-h-screen flex flex-col md:flex-row items-center justify-center bg-gradient-to-br from-gray-800 via-gray-900 to-black p-4 md:p-8">
 		<div id="box2">
 			<!-- <img src="../profileimage/techuboragnelogo.png" alt="" /> -->
 		</div>

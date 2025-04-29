@@ -26,7 +26,7 @@ if (isset($_SESSION['userid'])) {
 			crossorigin="anonymous"
 			referrerpolicy="no-referrer" />
 		<style>
-						.forgot-input-group > div {
+				.forgot-input-group > div {
 				transition: all 0.3s ease-in-out;
 				opacity: 1;
 			}
