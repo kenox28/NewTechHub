@@ -11,34 +11,69 @@ function homepage() {
 	loadPost();
 }
 
-function users() {
-	document.getElementById("users").style.display = "block";
-	console.log("hello");
-	document.getElementById("POST").style.display = "none";
-	loadUsers();
+// Function to load homepage statistics
+async function loadHomepageStats() {
+	try {
+		const res = await fetch("../php/count_stats.php");
+		const data = await res.json();
+
+		// Display the stats in the POST section at the top
+		const statsHtml = `
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+			<div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-500">
+				<div class="flex items-center">
+					<div class="p-3 rounded-full bg-blue-100 text-blue-500 mr-4">
+						<i class="fas fa-users text-xl"></i>
+					</div>
+					<div>
+						<p class="text-gray-500 text-sm">Total Users</p>
+						<h1 class="text-3xl font-bold">${data.total_users}</h1>
+					</div>
+				</div>
+			</div>
+			<div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-500">
+				<div class="flex items-center">
+					<div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
+						<i class="fas fa-newspaper text-xl"></i>
+					</div>
+					<div>
+						<p class="text-gray-500 text-sm">Total Posts</p>
+						<h1 class="text-3xl font-bold">${data.total_posts}</h1>
+					</div>
+				</div>
+			</div>
+			<div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-yellow-500">
+				<div class="flex items-center">
+					<div class="p-3 rounded-full bg-yellow-100 text-yellow-500 mr-4">
+						<i class="fas fa-flag text-xl"></i>
+					</div>
+					<div>
+						<p class="text-gray-500 text-sm">Total Reports</p>
+						<h1 class="text-3xl font-bold">${data.total_reports}</h1>
+					</div>
+				</div>
+			</div>
+			<div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-purple-500">
+				<div class="flex items-center">
+					<div class="p-3 rounded-full bg-purple-100 text-purple-500 mr-4">
+						<i class="fas fa-comment text-xl"></i>
+					</div>
+					<div>
+						<p class="text-gray-500 text-sm">Total Feedback</p>
+						<h1 class="text-3xl font-bold">${data.total_feedback}</h1>
+					</div>
+				</div>
+			</div>
+		</div>`;
+
+		// Prepend stats to the POST section
+		const postSection = document.getElementById("POST");
+		postSection.innerHTML = statsHtml + postSection.innerHTML;
+	} catch (error) {
+		console.error("Error loading homepage stats:", error);
+	}
 }
 
-async function loadUsers() {
-	const res = await fetch("../php/fetchuser.php");
-	const data = await res.json();
-	let rows = "";
-	for (let i = 0; i < data.length; i++) {
-		const u = data[i];
-		rows += `<tr class="hover:bg-gray-50">
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${u.userid}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${u.fname}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${u.lname}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${u.email}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${u.password}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm">
-                <a href="#" onclick="deleteUser(${u.userid})" class="text-red-600 hover:text-red-900">
-                    <i class="fas fa-trash"></i> Delete
-                </a>
-            </td>
-        </tr>`;
-	}
-	document.getElementById("userTableBody").innerHTML = rows;
-}
 async function loadPost() {
 	const res = await fetch("../php/post.php");
 	const data = await res.json();
@@ -90,6 +125,9 @@ async function loadPost() {
         </div>`;
 	}
 	document.getElementById("POST").innerHTML = rows;
+
+	// Load homepage stats after loading posts
+	loadHomepageStats();
 }
 
 function reactPost(postId, voteType = "up") {
@@ -147,6 +185,8 @@ async function loadRanks() {
 }
 
 async function deleteUser(userid) {
+	console.log("Trying to delete user with ID:", userid);
+
 	const res = await fetch("../php/deleteuserfromadmin.php", {
 		method: "POST",
 		headers: {
@@ -157,7 +197,45 @@ async function deleteUser(userid) {
 
 	const data = await res.json();
 
+	console.log("Delete response data:", data); // Log response data
+
 	if (data.status === "success") {
 		loadUsers();
+	} else {
+		console.log("Delete failed:", data.message);
 	}
+}
+
+function reports() {
+	window.location.href = "../views/reports.php";
+}
+function users() {
+	// document.getElementById("users").style.display = "block";
+	// console.log("hello");
+	// document.getElementById("POST").style.display = "none";
+	// loadUsers();
+	window.location.href = "../views/users.php";
+}
+async function loadUsers() {
+	const res = await fetch("../php/fetchuser.php");
+	const data = await res.json();
+	let rows = "";
+	for (let i = 0; i < data.length; i++) {
+		const u = data[i];
+		rows += `<tr class="hover:bg-gray-50">
+			<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${u.userid}</td>
+			<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${u.fname}</td>
+			<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${u.lname}</td>
+			<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${u.email}</td>
+			<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${u.password}</td>
+			<td class="px-6 py-4 whitespace-nowrap text-sm">
+				<a href="#" onclick="deleteUser(${u.userid})" class="text-red-600 hover:text-red-900">
+					<i class="fas fa-trash"></i> Delete
+				</a>
+			</td>
+		</tr>`;
+	}
+	document.getElementById("userTableBody").innerHTML = rows;
+	document.getElementById("totalUsers").textContent = data.length;
+	document.getElementById("endCount").textContent = Math.min(data.length, 10);
 }

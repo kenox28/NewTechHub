@@ -23,7 +23,7 @@
                     <i class="fas fa-users mr-3"></i>
                     <span>Users</span>
                 </button>
-                <button class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
+                <button onclick="reports()" class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
                     <i class="fas fa-chart-bar mr-3"></i>
                     <span>Reports</span>
                 </button>
@@ -31,10 +31,7 @@
                     <i class="fas fa-trophy mr-3"></i>
                     <span>LeaderBoards</span>
                 </button>
-                <button class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
-                    <i class="fas fa-file-alt mr-3"></i>
-                    <span>Reports</span>
-                </button>
+
                 <button class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
                     <i class="fas fa-comment mr-3"></i>
                     <span>Feedbacks</span>
@@ -61,8 +58,11 @@
 
             <!-- Content Area -->
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4">
+                <!-- Homepage Section -->
+
+
                 <!-- Posts Section -->
-                <section id="POST" class="space-y-4">
+                <section id="POST" class="space-y-4 hidden">
                     <!-- Content will be loaded here dynamically -->
                 </section>
 
@@ -115,7 +115,6 @@
             </main>
         </div>
     </div>
-
-    <script src="/admin/js/Adminhome.js"></script>
 </body>
+<script src="../js/Adminhome.js"></script>
 </html>

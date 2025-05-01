@@ -3,10 +3,10 @@ include_once "../../database.php";
 
 $sql = mysqli_query($connect, "
   SELECT 
-    SUM(ranks = 'beginner') AS beginners,
-    SUM(ranks = 'Intermediate') AS Intermediate,
-    SUM(ranks = 'Advanced') AS Advanced,
-    SUM(ranks = 'expert') AS expert
+    SUM(ranks = 'INTERN') AS beginners,
+    SUM(ranks = 'JUNIOR DEV') AS Intermediate,
+    SUM(ranks = 'MID-LEVEL') AS Advanced,
+    SUM(ranks = 'SENIOR DEV') AS expert
   FROM ranking
 ");
 
