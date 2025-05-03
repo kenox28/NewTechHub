@@ -24,7 +24,7 @@ header("Access-Control-Allow-Origin: *");
                 Admin Panel
             </div>
             <nav class="mt-4">
-                <button onclick="homepage()" class="flex items-center w-full px-4 py-3 bg-gray-700 transition-colors">
+                <button onclick="homepage()" class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
                     <i class="fas fa-home mr-3"></i>
                     <span>Home</span>
                 </button>
@@ -36,11 +36,10 @@ header("Access-Control-Allow-Origin: *");
                     <i class="fas fa-chart-bar mr-3"></i>
                     <span>Reports</span>
                 </button>
-                <button onclick="leaderboards()" class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
+                <button class="flex items-center w-full px-4 py-3 bg-gray-700 transition-colors">
                     <i class="fas fa-trophy mr-3"></i>
                     <span>LeaderBoards</span>
                 </button>
-
                 <button onclick="feedback()" class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
                     <i class="fas fa-comment mr-3"></i>
                     <span>Feedbacks</span>
@@ -57,7 +56,7 @@ header("Access-Control-Allow-Origin: *");
                         <button class="md:hidden mr-4 text-gray-600">
                             <i class="fas fa-bars"></i>
                         </button>
-                        <h1 class="text-xl font-semibold">Admin Dashboard</h1>
+                        <h1 class="text-xl font-semibold">LeaderBoards</h1>
                     </div>
                     <a href="#" id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded text-sm transition-colors">
                         Logout
@@ -67,11 +66,8 @@ header("Access-Control-Allow-Origin: *");
 
             <!-- Content Area -->
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4">
-                <!-- Homepage Section -->
-
-
-                <!-- Posts Section -->
-                <section id="POST" class="space-y-4 hidden">
+                <!-- Posts Section - No longer hidden by default -->
+                <section id="POST" class="space-y-4">
                     <!-- Content will be loaded here dynamically -->
                 </section>
 
@@ -101,6 +97,11 @@ header("Access-Control-Allow-Origin: *");
                     <div id="divtable" class="bg-white rounded-lg shadow-md overflow-hidden">
                         <div class="p-4 border-b border-gray-200">
                             <h2 class="text-lg font-semibold">User Management</h2>
+                            <div class="mt-2 flex justify-between items-center">
+                                <div class="text-sm text-gray-500">
+                                    Showing <span id="startCount">1</span> to <span id="endCount">10</span> of <span id="totalUsers">0</span> users
+                                </div>
+                            </div>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-200">
@@ -124,6 +125,6 @@ header("Access-Control-Allow-Origin: *");
             </main>
         </div>
     </div>
+    <script src="../js/leaderboard.js"></script>
 </body>
-<script src="../js/Adminhome.js"></script>
 </html>

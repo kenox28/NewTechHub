@@ -136,7 +136,7 @@ switch ($action) {
 
             // Set session variables
             if ($_SESSION['is_admin']) {
-                $_SESSION['userid'] = $row['adminid'];
+                $_SESSION['userid'] = $row['useridaddmin'];
             } else {
                 $_SESSION['userid'] = $row['userid'];
             }

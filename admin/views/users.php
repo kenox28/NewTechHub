@@ -1,3 +1,12 @@
+<?php
+session_start();
+// if wala naka login para no error mo balik sa loginpage
+if (!isset($_SESSION['userid'])) {
+    header("location:/newDesignTechbook/login.php");
+    exit();
+}
+header("Access-Control-Allow-Origin: *");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,12 +36,12 @@
                     <i class="fas fa-chart-bar mr-3"></i>
                     <span>Reports</span>
                 </button>
-                <button class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
+                <button onclick="leaderboards()" class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
                     <i class="fas fa-trophy mr-3"></i>
                     <span>LeaderBoards</span>
                 </button>
 
-                <button class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
+                <button onclick="feedback()" class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
                     <i class="fas fa-comment mr-3"></i>
                     <span>Feedbacks</span>
                 </button>
@@ -50,7 +59,7 @@
                         </button>
                         <h1 class="text-xl font-semibold">User Management</h1>
                     </div>
-                    <a href="#" class="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded text-sm transition-colors">
+                    <a href="#" id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded text-sm transition-colors">
                         Logout
                     </a>
                 </div>

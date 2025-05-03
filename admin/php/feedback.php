@@ -8,7 +8,7 @@ header('Access-Control-Allow-Origin: http://soctech.wuaze.com');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 header('Content-Type: application/json');
-$sql = mysqli_query($connect, "SELECT * FROM reportmessage");
+$sql = mysqli_query($connect, "SELECT * FROM feedbackmessage");
 
 $reports = [];
 
@@ -17,14 +17,16 @@ while ($reportData = mysqli_fetch_assoc($sql)) {
     // No status is needed as per requirement
 
     $reports[] = [
-        'id' => $reportData['id'], // You might have a specific report ID field
-        'type' => 'Report', // You might have a specific type field
-        'content' => $reportData['report'],
-        'reporter' => $reportData['fname'],
-        'date' => date('Y-m-d'), // You might have a date field in your database
+        'id' => $reportData['id'], 
+        'type' => 'message', 
+        'content' => $reportData['feedback'],
+        'sender' => $reportData['fname'],
+        'rate' => $reportData['rating'],
+        'date' => date('Y-m-d'),
         'userid' => $reportData['userid']
     ];
 }
 
+header('Content-Type: application/json');
 echo json_encode($reports);
 ?>

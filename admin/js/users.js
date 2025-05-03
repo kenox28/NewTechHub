@@ -234,3 +234,27 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /////////////////////////////////////////////////////
+function homepage() {
+	window.location.href = "../views/homepage.php";
+}
+function users() {
+	window.location.href = "../views/users.php";
+}
+function leaderboard() {
+	window.location.href = "../views/leaderboard.php";
+}
+function reports() {
+	window.location.href = "../views/reports.php";
+}
+function feedback() {
+	window.location.href = "../views/feedback.php";
+}
+document.getElementById("logoutBtn").addEventListener("click", function () {
+	// Optional: Clear session or localStorage if used
+	// sessionStorage.clear();
+	// localStorage.clear();
+
+	// Redirect to login page and replace history
+
+	window.location.replace("/newPhpfileTechhub/logout.php"); // Change this to your actual login page
+});

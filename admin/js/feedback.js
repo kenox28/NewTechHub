@@ -1,6 +1,6 @@
 async function loadReports() {
 	try {
-		const response = await fetch("/admin/php/reports.php");
+		const response = await fetch("/admin/php/feedback.php");
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
@@ -19,7 +19,8 @@ async function loadReports() {
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${report.id}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${report.type}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${report.content}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${report.reporter}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${report.sender}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${report.rate}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${report.date}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm">
                         <button onclick="deleteReport(${report.id})" class="text-red-600 hover:text-red-900">
@@ -46,7 +47,7 @@ async function loadReports() {
 async function deleteReport(id) {
 	if (confirm("Are you sure you want to delete this report?")) {
 		try {
-			const response = await fetch(`/admin/php/deletereport.php?id=${id}`);
+			const response = await fetch(`/admin/php/deletefeedback.php?id=${id}`);
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
@@ -106,14 +107,14 @@ function generateReport() {
 function homepage() {
 	window.location.href = "../views/homepage.php";
 }
-function leaderboard() {
-	window.location.href = "../views/leaderboard.php";
-}
 function users() {
 	window.location.href = "../views/users.php";
 }
-function feedback() {
-	window.location.href = "../views/feedback.php";
+function leaderboard() {
+	window.location.href = "../views/leaderboard.php";
+}
+function reports() {
+	window.location.href = "../views/reports.php";
 }
 document.getElementById("logoutBtn").addEventListener("click", function () {
 	// Optional: Clear session or localStorage if used

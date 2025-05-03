@@ -18,7 +18,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $userId = mysqli_real_escape_string($connect, $_GET['id']);
 
 // Delete the report
-$deleteQuery = "DELETE FROM reportmessage WHERE id = '$userId'";
+$deleteQuery = "DELETE FROM feedbackmessage WHERE id = '$userId'";
 $result = mysqli_query($connect, $deleteQuery);
 
 if ($result) {

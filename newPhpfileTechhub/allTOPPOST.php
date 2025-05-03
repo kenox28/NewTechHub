@@ -35,5 +35,5 @@ if ($result) {
     }
 }
 
-echo json_encode($posts);
+echo json_encode(["status" => "success", "message"=>"succcefuly fetch top post", $posts]);
 ?>

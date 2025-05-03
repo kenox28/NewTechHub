@@ -2,7 +2,7 @@
 session_start();
 // if wala naka login para no error mo balik sa loginpage
 if (!isset($_SESSION['userid'])) {
-    header("location:login.php");
+    header("location:/newDesignTechbook/login.php");
     exit();
 }
 header("Access-Control-Allow-Origin: *");
@@ -32,7 +32,7 @@ header("Access-Control-Allow-Origin: *");
                     <i class="fas fa-users mr-3"></i>
                     <span>Users</span>
                 </button>
-                <button onclick="reports()" class="flex items-center w-full px-4 py-3 bg-gray-700 transition-colors">
+                <button onclick="reports()" class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
                     <i class="fas fa-chart-bar mr-3"></i>
                     <span>Reports</span>
                 </button>
@@ -41,7 +41,7 @@ header("Access-Control-Allow-Origin: *");
                     <span>LeaderBoards</span>
                 </button>
 
-                <button onclick="feedback()" class="flex items-center w-full px-4 py-3 hover:bg-gray-700 transition-colors">
+                <button class="flex items-center w-full px-4 py-3 bg-gray-700 transition-colors">
                     <i class="fas fa-comment mr-3"></i>
                     <span>Feedbacks</span>
                 </button>
@@ -57,7 +57,7 @@ header("Access-Control-Allow-Origin: *");
                         <button class="md:hidden mr-4 text-gray-600">
                             <i class="fas fa-bars"></i>
                         </button>
-                        <h1 class="text-xl font-semibold">Reports Dashboard</h1>
+                        <h1 class="text-xl font-semibold">Feedbacks Dashboard</h1>
                     </div>
                     <a href="#" id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded text-sm transition-colors">
                         Logout
@@ -100,28 +100,7 @@ header("Access-Control-Allow-Origin: *");
                     </div>
 
                     <!-- Stats Summary Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                        <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-500">
-                            <p class="text-gray-500 text-sm">Total Users</p>
-                            <h1 id="totalUsers" class="text-3xl font-bold">248</h1>
-                            <p class="text-green-500 text-xs mt-1"><i class="fas fa-arrow-up"></i> 12% from last month</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-500">
-                            <p class="text-gray-500 text-sm">New Posts</p>
-                            <h1 id="newPosts" class="text-3xl font-bold">128</h1>
-                            <p class="text-green-500 text-xs mt-1"><i class="fas fa-arrow-up"></i> 8% from last month</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-yellow-500">
-                            <p class="text-gray-500 text-sm">User Engagement</p>
-                            <h1 id="userEngagement" class="text-3xl font-bold">67%</h1>
-                            <p class="text-red-500 text-xs mt-1"><i class="fas fa-arrow-down"></i> 3% from last month</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-purple-500">
-                            <p class="text-gray-500 text-sm">Total Interactions</p>
-                            <h1 id="totalInteractions" class="text-3xl font-bold">1.2k</h1>
-                            <p class="text-green-500 text-xs mt-1"><i class="fas fa-arrow-up"></i> 18% from last month</p>
-                        </div>
-                    </div>
+                    
                     
                     <!-- User Growth Chart -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -164,7 +143,8 @@ header("Access-Control-Allow-Origin: *");
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Report ID</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Content</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reporter</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sender</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rate</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                     </tr>
@@ -222,6 +202,6 @@ header("Access-Control-Allow-Origin: *");
         </div>
     </div>
 
-    <script src="/admin/js/report.js?v=1.0.1"></script>
+    <script src="/admin/js/feedback.js?v=1.0.1"></script>
 </body>
 </html>
