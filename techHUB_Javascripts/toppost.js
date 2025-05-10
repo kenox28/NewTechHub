@@ -9,13 +9,131 @@ formreport.onsubmit = function (e) {
 	e.preventDefault();
 };
 
+let offset = 0; // Initialize offset
+const limit = 10; // Number of posts to fetch
+let isLoading = false; // Flag to track loading state
+async function showpost() {
+	if (isLoading) return;
+	isLoading = true;
+	document.getElementById("loading").style.display = "flex"; // Show spinner
+
+	await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate loading delay
+
+	try {
+		const res = await fetch(
+			`../newPhpfiletechhub/allTOPPOST.php?offset=${offset}&limit=${limit}`
+		);
+		const data = await res.json();
+		let posts = "";
+		for (let i = 0; i < data.length; i++) {
+			const u = data[i];
+			posts += `
+            <div id="allpost">
+                <div class="feedname">
+                    <img src="../profileimage/${
+											u.img1
+										}" alt="" class="homeprofile" />
+                    <h1 id="Postname">${u.fname} ${u.lname}</h1>
+                </div>
+                <div class="Postcaption">
+                    <p id="Postcaption">${u.cappost}</p>
+                </div>
+                ${
+									u.imgpost
+										? `<div class="postpic"><img src="../profileimage/${u.imgpost}" alt="" id="postpic" /></div>`
+										: ""
+								}
+                <div class="like-section">
+                    <button onclick="reactPost(${
+											u.id
+										}, 'up')" type="button" id="upbtn_${
+				u.id
+			}" class="vote-btn ${u.upvoted ? "voted" : ""}">
+                        <i class="fa-regular fa-thumbs-up"></i>
+                    </button>
+                    <button onclick="reactPost(${
+											u.id
+										}, 'down')" type="button" id="downbtn_${
+				u.id
+			}" class="vote-btn ${u.downvoted ? "voted" : ""}">
+                        <i class="fa-regular fa-thumbs-down"></i>
+                    </button>
+                    <p id="likes_${u.id}" class="vote-count">Votes: ${
+				u.react
+			}</p>
+                </div>
+            </div>`;
+		}
+		document.getElementById("boxtoppost").innerHTML += posts;
+		offset += limit;
+	} catch (error) {
+		console.error("Error fetching posts:", error);
+	} finally {
+		document.getElementById("loading").style.display = "none";
+		isLoading = false;
+	}
+}
+
+showpost();
+
+const box1 = document.getElementById("boxtoppost");
+
+box1.addEventListener("scroll", () => {
+	if (box1.scrollTop + box1.clientHeight >= box1.scrollHeight - 100) {
+		showpost();
+	}
+});
+
+function reactPost(postId, voteType = "up") {
+	const buttonId = (voteType === "up" ? "upbtn_" : "downbtn_") + postId;
+	const button = document.getElementById(buttonId);
+
+	// Prevent the user from voting more than once
+	if (button.classList.contains("voted")) {
+		return;
+	}
+
+	// Disable the buttons to prevent further clicks
+	document.getElementById("upbtn_" + postId).classList.add("disabled");
+	document.getElementById("downbtn_" + postId).classList.add("disabled");
+
+	fetch("../newPhpfileTechhub/likes.php", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		body: `postid=${postId}&vote=${voteType}`,
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			if (data.success) {
+				document.getElementById("likes_" + postId).innerHTML =
+					"Votes: " + data.newCount;
+
+				button.classList.add("voted");
+
+				if (voteType === "up") {
+					document
+						.getElementById("upbtn_" + postId)
+						.querySelector("i").style.color = "#2ecc71"; // green
+				} else {
+					document
+						.getElementById("downbtn_" + postId)
+						.querySelector("i").style.color = "#e74c3c"; // red
+				}
+			} else {
+				console.error("Error: " + data.message);
+			}
+		})
+		.catch((error) => console.error("Error:", error));
+}
 btnforreports.onclick = function (e) {
 	e.preventDefault();
 
 	if (chatadmin === "") {
 		let xhr = new XMLHttpRequest();
 
-		xhr.open("POST", "reportsend.php", true);
+		xhr.open("POST", "../newPhpfileTechhub/reportsend.php", true);
 
 		xhr.onload = function () {
 			if (xhr.readyState === XMLHttpRequest.DONE) {

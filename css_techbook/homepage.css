@@ -2239,10 +2239,15 @@ input::placeholder {
 @media screen and (max-width: 768px) {
 	body {
 		height: 100vh;
-		gap: 20px;
-		padding: 20px 10px;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		scrollbar-width: 0;
+		width: 100%;
 	}
 
+	/* Para sa header */
 	header{
 		top: 0;
 		position: absolute;
@@ -2253,11 +2258,11 @@ input::placeholder {
 
 	#listheader1 {
 		position: absolute;
-		top: 98vh;
+		top: 90vh;
 		bottom: 0px;
 		height: 60px;
 		width: 100%;
-		border: solid 1px white;
+		border: solid 2px white;
 	}
 
 
@@ -2271,16 +2276,105 @@ input::placeholder {
 
 	}
 
+	/* G sudlan sa mga navigation bar */
 	.container {
 		height: 30px;
 		width: 20px;
 
 	}
 
+
+	/* Pag tanggal sa image */
 	#logo img {
 		display: none;
 	  }
 
+	  .box1 {
+		/* border: solid 2px white; */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	  }
+
+	  .box2 {
+		/* border: solid 2px white; */
+		position: absolute;
+		display: flex;
+		justify-content: start;
+		align-items: center;
+		flex-direction: row;
+		height: 100px;
+		width: 100%;
+		top: 50px;
+		left: 0;
+		border-radius: 0px;
+
+	  }
+
+	  ::-webkit-scrollbar {
+		display: none;
+	}
+
+	.showname{
+		display: none;
+	}
+	.showstat{
+		display: none;
+	}
+	.clickuser{
+		width: 70px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: transparent !important;
+	}
+	.clickuser img{
+		background-color: transparent;
+	}
+	img .homeprofile{
+		display: none;
+	}
+
+	#rdside{
+		display: none;
+	}
+
+	main{
+		height: 720px;
+		margin-top: 200px;
+		width: 100%;
+	}
+
+	#allpost{
+		/* border: solid 2px white; */
+		margin-top: 100px;
+
+	}
+
+	.postfeed{
+		/* border: solid 2px white; */
+		width: 100%;
+		display: flex;
+		justify-content: start;
+	}
+
+	.postfeed .container{
+		width: 100%;
+		height: 100%;
+		display: flex;
+
+	}
+
+	.divbutton{
+		/* border: solid 2px white; */
+		display: flex;
+		justify-content: center;
+	}
+
+	.divbutton .btn{
+		margin-right: 100px;
+	}
 }
 
 /* Additional adjustments for very small screens */
@@ -2288,8 +2382,11 @@ input::placeholder {
 	@media screen and (max-width: 320px) {
 		body {
 			height: auto;
-			padding: 10px;
 			flex-direction: column;
+		}
+
+		body::scrollbar{
+			width: 0;
 		}
 	
 		header {
@@ -2365,3 +2462,99 @@ input::placeholder {
 	
 }
 
+/* #GameDiv {
+	border: 1px solid #ccc;
+	padding: 10px;
+	position: absolute;
+	background-color: #04e92a;
+	z-index: 1;
+} */
+.like-section {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	padding: 10px 0;
+}
+
+.vote-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 8px 12px;
+	border-radius: 8px;
+	transition: all 0.2s ease;
+	font-size: 1.2rem;
+}
+
+.vote-btn i {
+	transition: transform 0.2s ease;
+	color: #64748b; /* Modern slate color */
+}
+
+/* Hover effects */
+.vote-btn:hover i {
+	transform: scale(1.2);
+}
+
+.vote-btn:hover i.fa-thumbs-up {
+	color: #3b82f6; /* Modern blue */
+}
+
+.vote-btn:hover i.fa-thumbs-down {
+	color: #ef4444; /* Modern red */
+}
+
+/* Voted states */
+.vote-btn.voted i.fa-thumbs-up {
+	color: #3b82f6; /* Modern blue */
+}
+
+.vote-btn.voted i.fa-thumbs-down {
+	color: #ef4444; /* Modern red */
+}
+
+.disabled {
+	pointer-events: none;
+	opacity: 0.6;
+}
+
+.vote-count {
+	font-size: 0.95rem;
+	color: #64748b;
+	font-weight: 500;
+	min-width: 80px;
+}
+
+/* Option 2: Slight transparency */
+.vote-btn:hover {
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Loading Overlay */
+.loading-overlay {
+	position: fixed;
+	top: 50%;
+
+	color: white;
+	font-size: 18px;
+	background-color: transparent; /* Make background transparent */
+	padding: 10px; /* Add some padding */
+}
+
+.spinner {
+	border: 4px solid transparent;
+	border-top: 4px solid white; /* Spinner color */
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

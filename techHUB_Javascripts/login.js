@@ -98,7 +98,7 @@ btn.onclick = function send(e) {
 						let response = JSON.parse(xhr.response);
 						if (response.status === "success") {
 							if (response.role === "admin") {
-								location.href = "adminhomepage.php";
+								location.href = "../admin/views/homepage.php";
 							} else {
 								location.href = "../newDesignTechbook/home.php";
 							}
@@ -133,6 +133,7 @@ btn.onclick = function send(e) {
 		formData.append("action", "verify_otp");
 		xhr.send(formData);
 	}
+	console.log("Raw response:", xhr.response);
 };
 const forgotbuton = document.querySelector("#forgotbuton");
 const formforforgot = document.querySelector("#formforforgot");

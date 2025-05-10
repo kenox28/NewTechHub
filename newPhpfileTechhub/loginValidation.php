@@ -13,7 +13,7 @@ header('Content-Type: application/json');
 if (!isset($_POST['action'])) {
     echo json_encode([
         'status' => 'error',
-        'message' => 'Action is required'
+        'message' => 'Action is required' . $_POST['action']
     ]);
     exit;
 }
@@ -136,7 +136,7 @@ switch ($action) {
 
             // Set session variables
             if ($_SESSION['is_admin']) {
-                $_SESSION['userid'] = $row['adminid'];
+                $_SESSION['userid'] = $row['useridaddmin'];
             } else {
                 $_SESSION['userid'] = $row['userid'];
             }

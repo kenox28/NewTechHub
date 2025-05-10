@@ -98,7 +98,7 @@ btnforreports.onclick = function (e) {
 	if (chatadmin === "") {
 		let xhr = new XMLHttpRequest();
 
-		xhr.open("POST", "reportsend.php", true);
+		xhr.open("POST", "../newPhpfileTechhub/reportsend.php", true);
 
 		xhr.onload = function () {
 			if (xhr.readyState === XMLHttpRequest.DONE) {
