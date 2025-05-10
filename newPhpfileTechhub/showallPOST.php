@@ -21,6 +21,7 @@ if ($result) {
             'lname' => htmlspecialchars($row['lname']),
             'img1' => htmlspecialchars($row['img1']),
             'imgpost' => htmlspecialchars($row['imgpost']),
+            'videopost' => htmlspecialchars($row['videopost']), // Added video post field
             'cappost' => htmlspecialchars($row['cappost']),
             'react' => (int)$row['react'],
             'upvoted' => isset($_SESSION['up_' . $row['id']]) ? true : false,

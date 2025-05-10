@@ -1,6 +1,13 @@
 <?php
 include_once "../../database.php";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
+header('Access-Control-Allow-Origin: http://soctech.wuaze.com');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Content-Type: application/json');
 // Count total users from account table
 $users_query = mysqli_query($connect, "SELECT COUNT(*) as total_users FROM account");
 $users_result = mysqli_fetch_assoc($users_query);

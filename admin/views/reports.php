@@ -2,7 +2,7 @@
 session_start();
 // if wala naka login para no error mo balik sa loginpage
 if (!isset($_SESSION['userid'])) {
-    header("location:login.php");
+    header("location:/newDesignTechbook/login.php");
     exit();
 }
 header("Access-Control-Allow-Origin: *");
