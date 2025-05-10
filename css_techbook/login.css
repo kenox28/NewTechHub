@@ -11,7 +11,6 @@ body {
 	height: 700px;
 	flex-wrap: wrap;
 	justify-content: center;
-	/* background-color: #212121; */
 	background-image: linear-gradient(
 		to left bottom,
 		#383838,
@@ -52,8 +51,6 @@ h1 {
 	height: 600px;
 	width: 400px;
 	border-radius: 10px;
-	/* background: rgba(22, 26, 23, 0.35); */
-	/* backdrop-filter: blur(160px); */
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -81,6 +78,7 @@ form {
 	box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 	flex-direction: column;
 }
+
 
 a {
 	height: 40px;
@@ -251,13 +249,11 @@ p {
 
 	width: 390px;
 	justify-content: center;
-	/* background-color: greenyellow; */
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	/* border: 1px solid green; */
 	gap: 35px;
 }
 #username {

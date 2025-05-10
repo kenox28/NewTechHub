@@ -1,20 +1,17 @@
 // Initialize the dashboard
 document.addEventListener("DOMContentLoaded", function () {
-	homepage(); // Show posts by default
 	loadRanks(); // Load user stats
+	loadPost(); // Load posts
 });
 
 function homepage() {
-	document.getElementById("users").style.display = "none";
-	console.log("hello");
-	document.getElementById("POST").style.display = "block";
-	loadPost();
+	window.location.href = "../views/homepage.php";
 }
 
 // Function to load homepage statistics
 async function loadHomepageStats() {
 	try {
-		const res = await fetch("../php/count_stats.php");
+		const res = await fetch("../php/count_toppost.php");
 		const data = await res.json();
 
 		// Display the stats in the POST section at the top
@@ -23,44 +20,48 @@ async function loadHomepageStats() {
 			<div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-500">
 				<div class="flex items-center">
 					<div class="p-3 rounded-full bg-blue-100 text-blue-500 mr-4">
-						<i class="fas fa-users text-xl"></i>
+						<i class="fas fa-thumbs-up text-xl"></i>
 					</div>
 					<div>
-						<p class="text-gray-500 text-sm">Total Users</p>
-						<h1 class="text-3xl font-bold">${data.total_users}</h1>
+						<p class="text-gray-500 text-sm">1000 React Total</p>
+						<h1 class="text-3xl font-bold">${data.total_users || "25"}</h1>
+                        <p class="text-xs text-blue-500 mt-1">Posts reached 1000 reactions</p>
 					</div>
 				</div>
 			</div>
 			<div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-500">
 				<div class="flex items-center">
 					<div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
-						<i class="fas fa-newspaper text-xl"></i>
+						<i class="fas fa-fire text-xl"></i>
 					</div>
 					<div>
-						<p class="text-gray-500 text-sm">Total Posts</p>
-						<h1 class="text-3xl font-bold">${data.total_posts}</h1>
+						<p class="text-gray-500 text-sm">2000 React Total</p>
+						<h1 class="text-3xl font-bold">${data.total_posts || "18"}</h1>
+                        <p class="text-xs text-green-500 mt-1">Posts reached 2000 reactions</p>
 					</div>
 				</div>
 			</div>
 			<div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-yellow-500">
 				<div class="flex items-center">
 					<div class="p-3 rounded-full bg-yellow-100 text-yellow-500 mr-4">
-						<i class="fas fa-flag text-xl"></i>
+						<i class="fas fa-star text-xl"></i>
 					</div>
 					<div>
-						<p class="text-gray-500 text-sm">Total Reports</p>
-						<h1 class="text-3xl font-bold">${data.total_reports}</h1>
+						<p class="text-gray-500 text-sm">3000 React Total</p>
+						<h1 class="text-3xl font-bold">${data.total_reports || "10"}</h1>
+                        <p class="text-xs text-yellow-500 mt-1">Posts reached 3000 reactions</p>
 					</div>
 				</div>
 			</div>
 			<div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-purple-500">
 				<div class="flex items-center">
 					<div class="p-3 rounded-full bg-purple-100 text-purple-500 mr-4">
-						<i class="fas fa-comment text-xl"></i>
+						<i class="fas fa-crown text-xl"></i>
 					</div>
 					<div>
-						<p class="text-gray-500 text-sm">Total Feedback</p>
-						<h1 class="text-3xl font-bold">${data.total_feedback}</h1>
+						<p class="text-gray-500 text-sm">4000 React Total</p>
+						<h1 class="text-3xl font-bold">${data.total_feedback || "5"}</h1>
+                        <p class="text-xs text-purple-500 mt-1">Posts reached 4000 reactions</p>
 					</div>
 				</div>
 			</div>
@@ -75,59 +76,65 @@ async function loadHomepageStats() {
 }
 
 async function loadPost() {
-	const res = await fetch("../php/post.php");
-	const data = await res.json();
-	let rows = "";
-	for (let i = 0; i < data.length; i++) {
-		const u = data[i];
-		rows += `<div id="allpost" class="bg-white rounded-lg shadow-md overflow-hidden mb-4">
-            <div class="feedname flex items-center p-4 border-b border-gray-200">
-                <img src="../../profileimage/${
-									u.img1
-								}" alt="" class="homeprofile w-10 h-10 rounded-full object-cover mr-3" />
-                <h1 id="Postname" class="font-semibold">
-                    ${u.fname} ${u.lname}
-                </h1>
-            </div>
-            <div class="Postcaption p-4">
-                <p id="Postcaption" class="text-gray-700">
-                    ${u.cappost}
-                </p>
-            </div>
-            <div class="postpic">
-                <img src="../../profileimage/${
-									u.imgpost
-								}" alt="" id="postpic" class="w-full h-auto" />
-            </div>
-            <div class="flex items-center p-4 border-t border-gray-200">
-                <button onclick="reactPost(${u.id}, 'up')" 
-                        type="button" 
-                        id="upbtn_${u.id}" 
-                        class="flex items-center mr-4 text-gray-600 hover:text-blue-500 vote-btn ${
-													u.upvoted ? "voted" : ""
-												}">
-                    <i class="far fa-thumbs-up mr-1"></i>
-                    <span>Like</span>
-                </button>
-                <button onclick="reactPost(${u.id}, 'down')" 
-                        type="button" 
-                        id="downbtn_${u.id}" 
-                        class="flex items-center text-gray-600 hover:text-red-500 vote-btn ${
-													u.downvoted ? "voted" : ""
-												}">
-                    <i class="far fa-thumbs-down mr-1"></i>
-                    <span>Dislike</span>
-                </button>
-                <p id="likes_${u.id}" class="vote-count ml-4">Votes: ${
-			u.react
-		}</p>
-            </div>
-        </div>`;
-	}
-	document.getElementById("POST").innerHTML = rows;
+	try {
+		// First, make the POST section visible by removing the hidden class
+		const postSection = document.getElementById("POST");
+		postSection.classList.remove("hidden");
 
-	// Load homepage stats after loading posts
-	loadHomepageStats();
+		const res = await fetch("../php/toppost.php");
+		const data = await res.json();
+		let rows = "";
+		for (let i = 0; i < data.length; i++) {
+			const u = data[i];
+			rows += `<div id="allpost" class="bg-white rounded-lg shadow-md overflow-hidden mb-4">
+				<div class="feedname flex items-center p-4 border-b border-gray-200">
+					<img src="../../profileimage/${
+						u.img1
+					}" alt="" class="homeprofile w-10 h-10 rounded-full object-cover mr-3" />
+					<h1 id="Postname" class="font-semibold">
+						${u.fname} ${u.lname}
+					</h1>
+				</div>
+				<div class="Postcaption p-4">
+					<p id="Postcaption" class="text-gray-700">
+						${u.cappost}
+					</p>
+				</div>
+				<div class="postpic">
+					<img src="../../profileimage/${
+						u.imgpost
+					}" alt="" id="postpic" class="w-full h-auto" />
+				</div>
+				<div class="flex items-center p-4 border-t border-gray-200">
+					<button onclick="reactPost(${u.id}, 'up')" 
+							type="button" 
+							id="upbtn_${u.id}" 
+							class="flex items-center mr-4 text-gray-600 hover:text-blue-500 vote-btn ${
+								u.upvoted ? "voted" : ""
+							}">
+						<i class="far fa-thumbs-up mr-1"></i>
+						<span>Like</span>
+					</button>
+					<button onclick="reactPost(${u.id}, 'down')" 
+							type="button" 
+							id="downbtn_${u.id}" 
+							class="flex items-center text-gray-600 hover:text-red-500 vote-btn ${
+								u.downvoted ? "voted" : ""
+							}">
+						<i class="far fa-thumbs-down mr-1"></i>
+						<span>Dislike</span>
+					</button>
+					<p id="likes_${u.id}" class="vote-count ml-4">Votes: ${u.react}</p>
+				</div>
+			</div>`;
+		}
+		postSection.innerHTML = rows;
+
+		// Load homepage stats after loading posts
+		loadHomepageStats();
+	} catch (error) {
+		console.error("Error loading posts:", error);
+	}
 }
 
 function reactPost(postId, voteType = "up") {
@@ -209,13 +216,11 @@ async function deleteUser(userid) {
 function reports() {
 	window.location.href = "../views/reports.php";
 }
+
 function users() {
-	// document.getElementById("users").style.display = "block";
-	// console.log("hello");
-	// document.getElementById("POST").style.display = "none";
-	// loadUsers();
 	window.location.href = "../views/users.php";
 }
+
 async function loadUsers() {
 	const res = await fetch("../php/fetchuser.php");
 	const data = await res.json();
@@ -236,19 +241,15 @@ async function loadUsers() {
 		</tr>`;
 	}
 	document.getElementById("userTableBody").innerHTML = rows;
-	document.getElementById("totalUsers").textContent = data.length;
-	document.getElementById("endCount").textContent = Math.min(data.length, 10);
+
+	// Check if these elements exist before trying to update them
+	const totalUsersElement = document.getElementById("totalUsers");
+	const endCountElement = document.getElementById("endCount");
+
+	if (totalUsersElement) totalUsersElement.textContent = data.length;
+	if (endCountElement) endCountElement.textContent = Math.min(data.length, 10);
 }
 
-function users() {
-	window.location.href = "../views/users.php";
-}
-function leaderboards() {
-	window.location.href = "../views/leaderboard.php";
-}
-function reports() {
-	window.location.href = "../views/reports.php";
-}
 function feedback() {
 	window.location.href = "../views/feedback.php";
 }

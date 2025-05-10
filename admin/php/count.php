@@ -1,12 +1,19 @@
 <?php
 include_once "../../database.php";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
+header('Access-Control-Allow-Origin: http://soctech.wuaze.com');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Content-Type: application/json');
 $sql = mysqli_query($connect, "
   SELECT 
-    SUM(ranks = 'beginner') AS beginners,
-    SUM(ranks = 'Intermediate') AS Intermediate,
-    SUM(ranks = 'Advanced') AS Advanced,
-    SUM(ranks = 'expert') AS expert
+    SUM(ranks = 'INTERN') AS beginners,
+    SUM(ranks = 'JUNIOR DEV') AS Intermediate,
+    SUM(ranks = 'MID-LEVEL') AS Advanced,
+    SUM(ranks = 'SENIOR DEV') AS expert
   FROM ranking
 ");
 

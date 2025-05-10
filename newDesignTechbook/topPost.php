@@ -97,19 +97,20 @@ if (!isset($_SESSION['userid'])) {
                 </div>
             </div>
 
-            <div class="boxtoppost" data-aos="fade-up" data-aos-duration="1000">
+            <div id="boxtoppost" class="boxtoppost" data-aos="fade-up" data-aos-duration="1000">
 
 
-                <?php include "../newPhpfileTechhub/allTOPPOST.php"?>
                 
 
 
             </div>
-            
+            <div id="loading" class="loading-overlay">
+                <div class="spinner"></div>
+            </div>   
 
         </main>
     </body>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="../techHUB_Javascripts/toppost.js?v=1.0.1"></script>
+    <script src="../techHUB_Javascripts/toppost.js?v=1.0.5"></script>
 </html>
