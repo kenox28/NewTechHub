@@ -11,7 +11,6 @@ body {
 	height: 700px;
 	flex-wrap: wrap;
 	justify-content: center;
-	/* background-color: #212121; */
 	background-image: linear-gradient(
 		to left bottom,
 		#383838,
@@ -52,29 +51,13 @@ h1 {
 	height: 600px;
 	width: 400px;
 	border-radius: 10px;
-	/* background: rgba(22, 26, 23, 0.35); */
-	/* backdrop-filter: blur(160px); */
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
 }
 form {
-	/* background-image: linear-gradient(
-		to right bottom,
-		#ffffff,
-		#e6e8ec,
-		#cbd1d8,
-		#afbcc4,
-		#92a8ae,
-		#859ea2,
-		#799595,
-		#6e8b87,
-		#6e8983,
-		#6e887e,
-		#6e867a,
-		#6f8476
-	); */
+
 	background-color: #212121;
 	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 	backdrop-filter: blur(15.5px);
@@ -96,27 +79,7 @@ form {
 	flex-direction: column;
 }
 
-/* #loginbtn {
-	font-size: 1.3rem;
-	font-weight: 700;
-	color: rgb(4, 255, 42);
-	border-radius: 10px;
-	background-image: linear-gradient(
-		to left bottom,
-		#768283,
-		#707b7c,
-		#6a7575,
-		#646e6f,
-		#5e6868,
-		#5d6665,
-		#5b6362,
-		#5a615f,
-		#5d6260,
-		#5f6361,
-		#626462,
-		#646564
-	);
-} */
+
 a {
 	height: 40px;
 	width: 300px;
@@ -214,31 +177,7 @@ p {
 #loginbtn.btn {
 	min-width: 250px; /* Wider width for login button */
 }
-/* .forgotdiv {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(22, 26, 23, 0.35);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(15.5px);
-    -webkit-backdrop-filter: blur(15.5px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 10px;
-    border: 1px solid rgb(4, 255, 42);
-    box-shadow: rgb(0, 0, 0) 0px 20px 30px -10px;
-} */
-/* label {
-	height: 150px;
-	width: 100%;
-	justify-content: center;
-	display: flex;
-	align-items: center;
-	font-size: 1.7rem;
-	font-weight: 700;
-	color: #000000;
-} */
+
 #divforsubmit {
 	height: 60px;
 	width: 100%;
@@ -311,13 +250,11 @@ p {
 
 	width: 390px;
 	justify-content: center;
-	/* background-color: greenyellow; */
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	/* border: 1px solid green; */
 	gap: 35px;
 }
 #username {
