@@ -8,7 +8,159 @@ formreport.onsubmit = function (e) {
 	e.preventDefault();
 };
 
-btnforreports.onclick = function (e) {
+async function Addpost() {
+	const form = document.getElementById("postfeed");
+	const formdata = new FormData(form);
+
+	const res = await fetch("../newphpfiletechhub/postcode.php", {
+		method: "POST",
+		body: formdata,
+	});
+
+	const result = await res.json();
+
+	if (result.status === "success") {
+		swal("Success!", result.message, "success");
+		showpost();
+	} else {
+		swal("Error!", result.message, "error");
+	}
+}
+
+document.getElementById("postfeed").addEventListener("submit", function (e) {
+	e.preventDefault();
+	Addpost();
+});
+
+let offset = 0; // Initialize offset
+const limit = 10; // Number of posts to fetch
+let isLoading = false; // Flag to track loading state
+
+// Assuming you have a div with the class 'box1' that contains the posts
+const box1 = document.querySelector(".box1");
+
+async function showpost() {
+	if (isLoading) return; // Prevent multiple fetch requests
+	isLoading = true; // Set loading state
+
+	// Show loading overlay
+	document.getElementById("loading").style.display = "flex"; // Show the spinner
+
+	// Introduce a 2-second delay before fetching posts
+	await new Promise((resolve) => setTimeout(resolve, 2000));
+
+	try {
+		const res = await fetch(
+			`../newPhpfiletechhub/showallPOST.php?offset=${offset}&limit=${limit}`
+		);
+		const data = await res.json();
+		let posts = "";
+		for (let i = 0; i < data.length; i++) {
+			const u = data[i];
+			posts += `
+                <div id="allpost">
+                    <div class="feedname">
+                        <img src="../profileimage/${
+													u.img1
+												}" alt="" class="homeprofile" />
+                        <h1 id="Postname">${u.fname} ${u.lname}</h1>
+                    </div>
+                    <div class="Postcaption">
+                        <p id="Postcaption">${u.cappost}</p>
+                    </div>${
+											u.imgpost
+												? `<div class="postpic"><img src="../profileimage/${u.imgpost}" alt="" id="postpic" /></div>`
+												: ""
+										}
+                    <div class="like-section">
+                        <button onclick="reactPost(${
+													u.id
+												}, 'up')" type="button" id="upbtn_${
+				u.id
+			}" class="vote-btn ${u.upvoted ? "voted" : ""}">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                        </button>
+                        <button onclick="reactPost(${
+													u.id
+												}, 'down')" type="button" id="downbtn_${
+				u.id
+			}" class="vote-btn ${u.downvoted ? "voted" : ""}">
+                            <i class="fa-regular fa-thumbs-down"></i>
+                        </button>
+                        <p id="likes_${u.id}" class="vote-count">Votes: ${
+				u.react
+			}</p>
+                    </div>
+                </div>
+            
+				`;
+		}
+		document.getElementById("allPOST").innerHTML += posts; // Append new posts
+		offset += limit; // Update offset for next fetch
+	} catch (error) {
+		console.error("Error fetching posts:", error);
+	} finally {
+		// Hide loading overlay
+		document.getElementById("loading").style.display = "none"; // Hide the spinner
+		isLoading = false; // Reset loading state
+	}
+}
+
+// Load initial posts
+showpost();
+
+// Add scroll event listener to the box1 div
+box1.addEventListener("scroll", () => {
+	if (box1.scrollTop + box1.clientHeight >= box1.scrollHeight - 100) {
+		showpost(); // Fetch more posts when near the bottom of the box1 div
+	}
+});
+
+function reactPost(postId, voteType = "up") {
+	const buttonId = (voteType === "up" ? "upbtn_" : "downbtn_") + postId;
+	const button = document.getElementById(buttonId);
+
+	// Prevent the user from voting more than once
+	if (button.classList.contains("voted")) {
+		return;
+	}
+
+	// Disable the buttons to prevent further clicks
+	document.getElementById("upbtn_" + postId).classList.add("disabled");
+	document.getElementById("downbtn_" + postId).classList.add("disabled");
+
+	fetch("../newPhpfileTechhub/likes.php", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		body: `postid=${postId}&vote=${voteType}`,
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			if (data.success) {
+				document.getElementById("likes_" + postId).innerHTML =
+					"Votes: " + data.newCount;
+
+				button.classList.add("voted");
+
+				if (voteType === "up") {
+					document
+						.getElementById("upbtn_" + postId)
+						.querySelector("i").style.color = "#2ecc71"; // green
+				} else {
+					document
+						.getElementById("downbtn_" + postId)
+						.querySelector("i").style.color = "#e74c3c"; // red
+				}
+			} else {
+				console.error("Error: " + data.message);
+			}
+		})
+		.catch((error) => console.error("Error:", error));
+}
+
+btnforreports.onclick = async function (e) {
 	e.preventDefault();
 
 	if (chatadmin === "") {
@@ -45,7 +197,6 @@ btnforreports.onclick = function (e) {
 	}
 };
 
-// Search functionality
 let search = document.querySelector("#searchbar");
 let search3 = document.querySelector(".search3");
 let divActive = document.querySelector(".divActive");
@@ -77,44 +228,6 @@ search.onkeyup = function (e) {
 	xhr1.send("searchterm=" + encodeURIComponent(searchinputed));
 };
 
-// Post code functionality
-const btnPost = document.querySelector("#captbtn");
-const postForm = document.querySelector("#postfeed");
-
-postForm.onsubmit = function (e) {
-	e.preventDefault();
-};
-
-btnPost.onclick = function (e) {
-	e.preventDefault();
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", "../newPhpfileTechhub/postcode.php", true);
-
-	xhr.onload = function () {
-		if (xhr.readyState === XMLHttpRequest.DONE) {
-			if (xhr.status === 200) {
-				try {
-					const response = JSON.parse(xhr.response);
-					if (response.status === "success") {
-						swal("Success!", response.message, "success").then(() => {
-							location.reload();
-						});
-					} else {
-						swal("Error!", response.message, "error");
-					}
-				} catch (e) {
-					console.error("Error parsing response:", e);
-					swal("Error!", "Something went wrong!", "error");
-				}
-			}
-		}
-	};
-
-	let formdatainputed = new FormData(postForm);
-	xhr.send(formdatainputed);
-};
-
-// Logout functionality
 const logout = document.querySelector("#logout");
 logout.onclick = function (e) {
 	console.log("run");
@@ -272,5 +385,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	backButton.addEventListener("click", function () {
 		searchHeader.classList.remove("search-active");
+	});
+});
+document.addEventListener("DOMContentLoaded", function () {
+	const gameBtn = document.getElementById("sidebtnGameid");
+	const gameDiv = document.getElementById("GameDiv");
+	const closeBtn = document.getElementById("closeGameDiv");
+
+	gameBtn.addEventListener("click", function (e) {
+		e.preventDefault();
+		gameDiv.style.display = "block";
+	});
+
+	closeBtn.addEventListener("click", function () {
+		gameDiv.style.display = "none";
 	});
 });

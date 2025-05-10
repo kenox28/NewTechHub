@@ -2250,3 +2250,99 @@ input::placeholder {
 	background: rgba(255, 255, 255, 0.2);
 }
 /* Existing styles remain the same until media queries */
+/* #GameDiv {
+	border: 1px solid #ccc;
+	padding: 10px;
+	position: absolute;
+	background-color: #04e92a;
+	z-index: 1;
+} */
+.like-section {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	padding: 10px 0;
+}
+
+.vote-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 8px 12px;
+	border-radius: 8px;
+	transition: all 0.2s ease;
+	font-size: 1.2rem;
+}
+
+.vote-btn i {
+	transition: transform 0.2s ease;
+	color: #64748b; /* Modern slate color */
+}
+
+/* Hover effects */
+.vote-btn:hover i {
+	transform: scale(1.2);
+}
+
+.vote-btn:hover i.fa-thumbs-up {
+	color: #3b82f6; /* Modern blue */
+}
+
+.vote-btn:hover i.fa-thumbs-down {
+	color: #ef4444; /* Modern red */
+}
+
+/* Voted states */
+.vote-btn.voted i.fa-thumbs-up {
+	color: #3b82f6; /* Modern blue */
+}
+
+.vote-btn.voted i.fa-thumbs-down {
+	color: #ef4444; /* Modern red */
+}
+
+.disabled {
+	pointer-events: none;
+	opacity: 0.6;
+}
+
+.vote-count {
+	font-size: 0.95rem;
+	color: #64748b;
+	font-weight: 500;
+	min-width: 80px;
+}
+
+/* Option 2: Slight transparency */
+.vote-btn:hover {
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Loading Overlay */
+.loading-overlay {
+	position: fixed;
+	top: 50%;
+
+	color: white;
+	font-size: 18px;
+	background-color: transparent; /* Make background transparent */
+	padding: 10px; /* Add some padding */
+}
+
+.spinner {
+	border: 4px solid transparent;
+	border-top: 4px solid white; /* Spinner color */
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

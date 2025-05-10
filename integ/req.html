@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Submit Request</title>
+	</head>
+	<body>
+		<h2>Submit Vehicle Request</h2>
+
+		<form id="requestForm" method="POST" enctype="multipart/form-data">
+			<label for="name">Full Name:</label>
+			<input type="text" name="name" id="name" required /><br /><br />
+
+			<label for="email">Email:</label>
+			<input type="email" name="email" id="email" required /><br /><br />
+
+			<label for="course">Course:</label>
+			<input type="text" name="course" id="course" required /><br /><br />
+
+			<label for="section">Section:</label>
+			<input type="text" name="section" id="section" required /><br /><br />
+
+			<label for="year_lvl">Year Level:</label>
+			<input
+				type="number"
+				name="year_lvl"
+				id="year_lvl"
+				min="1"
+				max="6"
+				required /><br /><br />
+
+			<label for="subscription_type">Subscription Type:</label>
+			<select name="subscription_type" id="subscription_type" required>
+				<option value="">-- Select --</option>
+				<option value="Semester">Semester</option>
+				<option value="Yearly">Yearly2</option></select
+			><br /><br />
+
+			<label for="OR_picture">OR Picture:</label>
+			<input
+				type="file"
+				name="OR_picture"
+				id="OR_picture"
+				accept="image/*"
+				required /><br /><br />
+
+			<label for="CR_picture">CR Picture:</label>
+			<input
+				type="file"
+				name="CR_picture"
+				id="CR_picture"
+				accept="image/*"
+				required /><br /><br />
+
+			<label for="license_picture">License Picture:</label>
+			<input
+				type="file"
+				name="license_picture"
+				id="license_picture"
+				accept="image/*"
+				required /><br /><br />
+
+			<button type="submit">Submit Request</button>
+		</form>
+
+		<script>
+			console.log("5:00am");
+			document
+				.getElementById("requestForm")
+				.addEventListener("submit", function (e) {
+					e.preventDefault();
+
+					const form = e.target;
+					const formData = new FormData(form);
+
+					fetch("http://192.168.254.106:3000/backend/submit_request.php", {
+						method: "POST",
+						body: formData,
+					})
+						.then((response) => response.json())
+						.then((data) => {
+							if (data.status === "success") {
+								window.location.href = "req.html";
+							} else {
+								alert(data.message || "Something went wrong!");
+							}
+						})
+						.catch((error) => {
+							console.error("Error:", error);
+							alert("Error submitting request.");
+						});
+				});
+		</script>
+	</body>
+</html>
