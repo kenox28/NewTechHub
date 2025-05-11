@@ -15,7 +15,7 @@ header("Access-Control-Allow-Origin: *");
         <title>home</title>
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <!-- <link rel="stylesheet" href="1.css" /> -->
-        <link rel="stylesheet" href="../css_techbook/homepage.css?v=1.0.3">
+        <link rel="stylesheet" href="../css_techbook/homepage.css?v=1.0.4">
         <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
         <link
             rel="stylesheet"

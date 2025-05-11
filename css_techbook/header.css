@@ -470,3 +470,17 @@ i:hover {
 .swal-modal::-webkit-scrollbar-thumb:hover {
 	background: rgba(255, 255, 255, 0.2);
 }
+
+
+@media screen and (max-width: 768px) {
+	#listheader2 {
+		height: 50px;
+		width: 210px;
+		position: absolute;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+
+	}
+
+}
