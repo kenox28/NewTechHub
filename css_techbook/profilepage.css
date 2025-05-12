@@ -210,11 +210,11 @@ a {
 	height: 60px;
 	width: 60px;
 	/* border: 1px solid black; */
-	align-items: center;
+	/* align-items: center;
 	justify-content: center;
 	display: flex;
 	border-radius: 50%;
-}
+} */
 */ #divshow {
 	height: 280px;
 	background-color: transparent;
@@ -2047,3 +2047,4 @@ label {
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
 }
+

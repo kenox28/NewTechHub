@@ -2264,19 +2264,25 @@ input::placeholder {
 	/* Para sa header */
 	header{
 		top: 0;
-		position: absolute;
+		position: fixed;
 		width: 100%;
-		height: 50px;
+		height: 70px;
 		left: 0;
+		transition: top 0.3s ease-in-out;
+
 	}
 
 	#listheader1 {
-		position: absolute;
-		top: 90vh;
+		position: fixed;
+		top: 93vh;
 		bottom: 0px;
 		height: 60px;
 		width: 100%;
-		border: solid 2px white;
+		border-top: solid 1px white;
+		z-index: 1000;
+		box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
+		-webkit-box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
+		-moz-box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
 	}
 
 
@@ -2320,7 +2326,7 @@ input::placeholder {
 		flex-direction: row;
 		height: 100px;
 		width: 100%;
-		top: 50px;
+		top: 70px;
 		left: 0;
 		border-radius: 0px;
 

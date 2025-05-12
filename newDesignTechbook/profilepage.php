@@ -14,8 +14,9 @@ if (!isset($_SESSION['userid'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>profile</title>
         <link rel="stylesheet" href="../css_techbook/header.css?v=1.0.2">
-        <link rel="stylesheet" href="../css_techbook/profilepage.css?v=1.0.5" />
+        <link rel="stylesheet" href="../css_techbook/profilepage.css?v=1.0.4" />
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 
         <link
             rel="stylesheet"
