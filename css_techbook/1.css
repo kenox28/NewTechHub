@@ -1537,7 +1537,7 @@ i:hover {
 		height: 70px;
 		left: 0;
 		transition: top 0.3s ease-in-out;
-
+		margin: none;
 	}
 
 	#logo img {
@@ -1575,15 +1575,15 @@ i:hover {
 
 	.box2 {
 		/* border: solid 2px white; */
-		position: absolute;
+		/* position: absolute; */
 		display: flex;
 		justify-content: start;
 		align-items: center;
 		flex-direction: row;
 		height: 100px;
 		width: 100%;
-		top: 70px;
-		left: 0;
+		/* top: 70px;
+		left: 0; */
 		border-radius: 0px;
 
 	  }
@@ -1620,11 +1620,15 @@ i:hover {
 	}
 
 	main{
-		height: 650px;
-		margin-top: 100px;
+		position: fixed;
+		top: 70px;
+		gap: 0px;
+		height: 78vh;
+		margin: none;
 		width: 100%;
 		/* border: solid 2px white; */
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		padding: 0;
@@ -1639,9 +1643,12 @@ i:hover {
 	}
 
 	.chatheader{
+		overflow: visible;
 		width: 100%;
 		height: 50px;
-		/* position: fixed; */
+		position: sticky;
+		top: 0px;
+		z-index: 1000;
 		/* border: solid 2px white; */
 	}
 
@@ -1652,12 +1659,15 @@ i:hover {
 	}
 
 	.footerchat{
+		position: sticky;
+		bottom: 0px;
+		z-index: 1000;
 		width: 100%;
 		height: 50px;
 		margin-top: 10px;
 		/* border: solid 2px white; */
 		display: flex;
-		flex-direction: start;
+		/* flex-direction: start; */
 		justify-content: center;
 		/* align-items: center; */
 

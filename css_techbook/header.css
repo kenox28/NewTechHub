@@ -473,6 +473,17 @@ i:hover {
 
 
 @media screen and (max-width: 768px) {
+	#listheader1{
+		height: 7vh;
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		background-color: lightgray;
+		border-radius: 20px 20px 0px 0px;
+	}
 	#listheader2 {
 		height: 50px;
 		width: 210px;
