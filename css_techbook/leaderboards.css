@@ -1,43 +1,89 @@
 @media screen and (max-width: 768px) {
-  main{
-    border: white 1px solid;
-    flex-direction: column;
-    width: 100%;
-    height: 80vh;
-    gap: 10%;
-    justify-content: center;
-    align-items: center;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    
-  }
-    main::-webkit-scrollbar {
-        display: none;
-    }
-  body{
+  body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: auto;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
-  #rdside{
+  main {
+    border: white 1px solid;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    padding-bottom: 10%;
+  }
+  .listheader1{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+  }
+  .box1, .box2, .box3, .box4 {
+    width: 100%;
+    max-width: 350px;
+    min-width: 0;
+    height: auto;
+    margin: 0 auto 20px auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
     display: flex;
-    width: 70%;
-    height: 500px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 500px;
   }
-  #homedivside{
+  .actname,
+  .showname2,
+  .showstat {
+    display: flex !important;
+  }
+  .clickuser {
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent !important;
+  }
+  .clickuser img {
+    background-color: transparent;
+  }
+  img .homeprofile {
     display: block;
-    height: 500px;
+  }
+  #rdside {
+    display: flex;
+    width: 90%;
+    max-width: 350px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    
-}
+    height: auto;
+    min-height: 300px;
+  }
+  #homedivside {
+    display: block;
+    height: auto;
+    max-height: 500px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #listheader1 {
+    position: fixed;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    z-index: 5;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
