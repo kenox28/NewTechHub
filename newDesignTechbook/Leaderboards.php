@@ -16,6 +16,7 @@ if (!isset($_SESSION['userid'])) {
         <title>Position</title>
         <link rel="stylesheet" href="../css_techbook/1.css?v=1.0.2" />
         <link rel="stylesheet" href="../css_techbook/header.css" />
+        <link rel="stylesheet" href="../css_techbook/feedback&report.css">
 
         <link
             rel="stylesheet"

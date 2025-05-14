@@ -1636,6 +1636,7 @@ input::placeholder {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
+	border: solid 2px white;
 }
 
 #labelrpt {
@@ -2398,6 +2399,14 @@ input::placeholder {
 	.divbutton .btn{
 		margin-right: 100px;
 	}
+
+	/* Para sa feedback */
+	/* .feedback{
+		width: 100px;
+		height: 300px;
+		border: solid 2px white;
+	} */
+
 
 
 }

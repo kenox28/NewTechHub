@@ -1,0 +1,12 @@
+@media screen and (max-width: 768px) {
+    #feedbackModal{
+        width: 80%;
+        height: 50%;
+    }
+    #reportmessage{
+        width: 80%;
+        height: 50%;
+    }
+    
+}
+
