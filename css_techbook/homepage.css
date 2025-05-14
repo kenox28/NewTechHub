@@ -316,12 +316,12 @@ a {
 	height: 280px;
 	background-color: transparent;
 	width: 150px;
-	position: absolute;
+	position: fixed;      /* Use fixed for top-level stacking */
 	right: 1px;
 	top: 75px;
 	display: none;
 	border-radius: 10px;
-	z-index: 1;
+	z-index: 9999;        /* Highest z-index on your site */
 	gap: 10px;
 }
 #homeprofile {
@@ -645,6 +645,7 @@ i:hover {
 }
 
 .box1 {
+	z-index: 1;
 	height: 600px;
 	width: 700px;
 	overflow: auto;
@@ -700,6 +701,7 @@ i:hover {
 	align-items: center;
 	gap: 10px;
 	overflow: auto;
+	z-index: 1;
 }
 
 .box2::-webkit-scrollbar {
@@ -2257,15 +2259,16 @@ input::placeholder {
 		transition: top 0.3s ease-in-out;
 
 	}
-
 	#listheader1 {
+		background-color: lightgray;
 		position: fixed;
 		top: 93vh;
 		bottom: 0px;
 		height: 60px;
 		width: 100%;
+		border-radius: 1rem 1rem 0px 0px;
 		border-top: solid 1px white;
-		z-index: 1000;
+		z-index: 9999;
 		box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
 		-webkit-box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
 		-moz-box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
@@ -2274,8 +2277,8 @@ input::placeholder {
 
 	#listheader2 {
 		height: 50px;
-		width: 210px;
-		position: absolute;
+		width: 10%;
+		position: fixed;
 		display: flex;
 		justify-content: space-evenly;
 		align-items: center;
@@ -2296,6 +2299,8 @@ input::placeholder {
 	  }
 
 	  .box1 {
+		margin-top: 100px;
+		height: 70vh;
 		/* border: solid 2px white; */
 		display: flex;
 		justify-content: center;
@@ -2305,7 +2310,7 @@ input::placeholder {
 
 	  .box2 {
 		/* border: solid 2px white; */
-		position: absolute;
+		position: fixed;
 		display: flex;
 		justify-content: start;
 		align-items: center;
@@ -2347,14 +2352,14 @@ input::placeholder {
 	}
 
 	main{
-		height: 720px;
-		margin-top: 200px;
+		flex-direction: column-reverse;
+		height: auto;
 		width: 100%;
 	}
 
 	#allpost{
 		/* border: solid 2px white; */
-		margin-top: 100px;
+		margin-top: 5%;
 
 	}
 
@@ -2386,25 +2391,18 @@ input::placeholder {
 /* Additional adjustments for very small screens */
 @media screen and (max-width: 320px) {
 	@media screen and (max-width: 320px) {
-		body {
-			height: auto;
-			flex-direction: column;
+
+		body{
+			overflow: scroll;
+			scrollbar-width: none;
+			overflow-y: hidden;
 		}
 
-		body::scrollbar{
-			width: 0;
-		}
 	
-		header {
+		/* header {
 			width: 100%;
 			height: auto;
 			position: relative;
-		}
-	
-		#listheader2 {
-			flex-direction: column;
-			height: auto;
-			width: 100%;
 		}
 	
 		.container {
@@ -2464,9 +2462,9 @@ input::placeholder {
 			padding: 5px;
 			font-size: 0.9rem;
 		}
+*/			
+	}	
 	}
-	
-}
 
 /* #GameDiv {
 	border: 1px solid #ccc;
