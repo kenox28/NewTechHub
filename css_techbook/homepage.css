@@ -2302,10 +2302,6 @@ input::placeholder {
 	.search3{
 		width: 90%;
 		height: 500px;
-		/* display: flex; */
-		/* justify-content: center; */
-		/* align-items: center; */
-		border: solid 2px white;
 	}
 
 	/* G sudlan sa mga navigation bar */
