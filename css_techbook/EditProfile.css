@@ -559,3 +559,22 @@
 	transform: translateY(-2px);
 	box-shadow: 0 8px 20px rgba(0, 103, 126, 0.3);
 }
+
+@media screen and (max-width: 768px) {
+	#sidep {
+		width: 100%;
+		height: auto;
+		padding: 10px;
+	}
+
+	#EditForm {
+		width: 100%;
+		flex-direction: column;
+	}
+
+	#rsubmit {
+		flex-direction: column;
+		align-items: center;
+	}
+	
+}

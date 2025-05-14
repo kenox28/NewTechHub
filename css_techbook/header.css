@@ -128,7 +128,7 @@ header {
 	top: 75px;
 	display: none;
 	border-radius: 10px;
-	z-index: 9999;        /* Highest z-index on your site */
+	z-index: 5;        /* Highest z-index on your site */
 	gap: 10px;
 }
 
@@ -481,6 +481,7 @@ i:hover {
 		height: 70px;
 		left: 0;
 		transition: top 0.3s ease-in-out;
+		z-index: 2;
 	}
 	#listheader1{
 		height: 7vh;
@@ -492,6 +493,7 @@ i:hover {
 		align-items: center;
 		background-color: lightgray;
 		border-radius: 1rem 1rem 0px 0px;
+		z-index:  5;
 	}
 	#listheader2 {
 		margin-left: 1rem;
@@ -500,7 +502,9 @@ i:hover {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
+		z-index: 5;
 
 	}
+
 
 }

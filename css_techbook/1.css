@@ -269,7 +269,7 @@ i:hover {
 }
 
 #homedivside {
-	height: calc(100% - 70px);
+	/* height: calc(100% - 70px); */
 	overflow-y: auto;
 	padding-right: 10px;
 }
@@ -1527,6 +1527,7 @@ i:hover {
 		left: 0;
 		transition: top 0.3s ease-in-out;
 		margin: none;
+		z-index: 2;
 	}
 
 	#logo img {
@@ -1540,7 +1541,7 @@ i:hover {
 		height: 60px;
 		width: 100%;
 		/* border-top: solid 1px white; */
-		z-index: 1000;
+		z-index: 5;
 		/* box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
 		-webkit-box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
 		-moz-box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75); */
@@ -1610,7 +1611,9 @@ i:hover {
 		justify-content: center;
 		align-items: center;
 		padding: 0;
+		z-index: 1 ;
 	}
+	
 
 	#messagediv{
 		width: 100%;
