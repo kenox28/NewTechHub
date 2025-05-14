@@ -2289,18 +2289,58 @@ input::placeholder {
 
 	#listheader2 {
 		height: 50px;
-		width: 10%;
+		width: 70%;
 		position: fixed;
 		display: flex;
-		justify-content: space-evenly;
+		justify-content: center;
 		align-items: center;
+		flex-direction: column;
+		/* border: solid 2px white; */
 
 	}
 
+	.search3{
+		width: 90%;
+		height: 500px;
+		/* display: flex; */
+		/* justify-content: center; */
+		/* align-items: center; */
+		border: solid 2px white;
+	}
+
 	/* G sudlan sa mga navigation bar */
-	.container {
-		height: 30px;
-		width: 20px;
+	form .container {
+		height: 50px;
+		width: 280px;
+		/* border: solid 2px green; */
+
+	}
+
+	.searchuserA{
+		width: 80%;
+		height: 300px;
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		border-radius: 10px;
+		/* border: solid 2px white; */
+	}
+
+	.searchuserA .showname{
+		display: block;
+		align-items: center;
+		width: 100%;
+		height: 50px;
+		/* border: solid 2px white; */
+	}
+
+	.searchuserA .actname{
+		/* border: solid 2px white; */
+		width: 100%;
+	}
+
+	.searchuserA .showprofile{
+		margin-left: 20px;
 
 	}
 
@@ -2406,6 +2446,8 @@ input::placeholder {
 		height: 300px;
 		border: solid 2px white;
 	} */
+
+
 
 
 
