@@ -16,6 +16,7 @@ if (!isset($_SESSION['userid'])) {
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <!-- <link rel="stylesheet" href="1.css" /> -->
         <link rel="stylesheet" href="../css_techbook/toppost.css?v=1.0.2">
+        <link rel="stylesheet" href="../css_techbook/feedback&report.css">
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"

@@ -17,6 +17,7 @@ if (!isset($_SESSION['userid'])) {
         <link rel="stylesheet" href="../css_techbook/1.css?v=1.0.3" />
         <link rel="stylesheet" href="../css_techbook/header.css">
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css_techbook/feedback&report.css">
 
         <link
             rel="stylesheet"
@@ -29,7 +30,7 @@ if (!isset($_SESSION['userid'])) {
 
     <body>
 
-        <?php include "header.php"?>
+        <?php include "header.php"?>    
         <main>
             <div id="reportmessage">
                     <div id="btnforx">
