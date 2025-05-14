@@ -5,7 +5,20 @@
 	display: flex;
 	align-items: center;
 } */
+.search-container {
+	margin-bottom: 20px !important;
+	display: flex !important;
+	justify-content: center !important;
+}
 
+#search {
+	width: 100% !important;
+	max-width: 400px !important;
+	padding: 10px !important;
+	border: 1px solid #ccc !important;
+	border-radius: 8px !important;
+	font-size: 16px !important;
+}
 .input {
 	width: 200px;
 	height: 50px;
@@ -31,6 +44,7 @@
 
 .container .input:valid ~ .label,
 .container .input:focus ~ .label {
+	width: 100%;
 	transition: 0.3s;
 	padding-left: 2px;
 	transform: translateY(-35px);
@@ -48,7 +62,8 @@
 	justify-content: center;
 	/* background-color: greenyellow; */
 	display: flex;
-	align-items: center;
+	justify-content: center;
+	/* align-items: center; */
 }
 
 /* From Uiverse.io by gharsh11032000 */

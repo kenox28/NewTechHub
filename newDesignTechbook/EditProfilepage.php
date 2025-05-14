@@ -12,7 +12,7 @@ if (!isset($_SESSION['userid'])) {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Edit</title>
-		<link rel="stylesheet" href="../css_techbook/EditProfile.css?v=1.0.4" />
+		<link rel="stylesheet" href="../css_techbook/EditProfile.css?v=1.0.6" />
 		<link rel="stylesheet" href="../css_techbook/header.css?v=1.0.5" />
 		<link rel="stylesheet" href="../css_techbook/1.css?v=1.0.4" />
 		<link
@@ -117,7 +117,7 @@ if (!isset($_SESSION['userid'])) {
 							</div>
 						</div>
 						<div class="divinput" id="Userdiv">
-							<div class="container">
+							<!-- <div class="container">
 								<input
 									required=""
 									type="email"
@@ -125,7 +125,7 @@ if (!isset($_SESSION['userid'])) {
 									id="email"
 									class="input"
 									placeholder="Enter email account" />
-							</div>
+							</div> -->
 							<div class="container">
 								<input
 									required=""
@@ -146,14 +146,14 @@ if (!isset($_SESSION['userid'])) {
 									class="input"
 									placeholder="Enter number" />
 							</div>
-							<div class="container">
+							<!-- <div class="container">
 								<input
 									required=""
 									type="date"
 									class="input"
 									id="dateb"
 									name="bday" />
-							</div>
+							</div> -->
 						</div>
 						<div class="divinput" id="fnamediv">
 							<div class="container">
@@ -196,7 +196,7 @@ if (!isset($_SESSION['userid'])) {
 							</div>
 						</div>
 						<div id="rsubmit">
-							<div class="radio-button-container">
+							<!-- <div class="radio-button-container">
 								<div class="radio-button">
 									<input
 										type="radio"
@@ -221,7 +221,7 @@ if (!isset($_SESSION['userid'])) {
 										Female
 									</label>
 								</div>
-							</div>
+							</div> -->
 							<div class="divMG">
 								<label for="idimage" id="labelIMG">Select Profile</label>
 								<input type="file" id="idimage" name="img" />

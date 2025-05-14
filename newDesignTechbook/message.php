@@ -14,7 +14,7 @@ if (!isset($_SESSION['userid'])) {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Message</title>
-        <link rel="stylesheet" href="../css_techbook/1.css?v=1.0.2" />
+        <link rel="stylesheet" href="../css_techbook/1.css?v=1.0.3" />
         <link rel="stylesheet" href="../css_techbook/header.css">
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
