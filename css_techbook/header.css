@@ -128,7 +128,7 @@ header {
 	top: 75px;
 	display: none;
 	border-radius: 10px;
-	z-index: 9999;        /* Highest z-index on your site */
+	z-index: 5;        /* Highest z-index on your site */
 	gap: 10px;
 }
 
@@ -481,6 +481,7 @@ i:hover {
 		height: 70px;
 		left: 0;
 		transition: top 0.3s ease-in-out;
+		z-index: 2;
 	}
 	#listheader1{
 		height: 7vh;
@@ -492,15 +493,67 @@ i:hover {
 		align-items: center;
 		background-color: lightgray;
 		border-radius: 1rem 1rem 0px 0px;
+		z-index:  5;
 	}
-	#listheader2 {
+	/* #listheader2 {
 		margin-left: 1rem;
 		width: 10%;
 		height: 50px;
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
+		z-index: 5;
+
+	} */
+
+	#listheader2 {
+		height: 50px;
+		width: 70%;
+		position: fixed;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		/* border: solid 2px white; */
+
+	}
+
+	.search3{
+		width: 90%;
+		height: 500px;
+	}
+
+	/* G sudlan sa mga navigation bar */
+	form .container {
+		height: 50px;
+		width: 280px;
+		/* border: solid 2px green; */
+
+	}
+
+	.searchuserA{
+		width: 80%;
+		height: 300px;
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		border-radius: 10px;
+		/* border: solid 2px white; */
+	}
+
+	.actname{
+		display: block;
+		align-items: center;
+		width: 100%;
+		height: 50px;
+		/* border: solid 2px white; */
+	}
+
+
+	.searchuserA .showprofile{
+		margin-left: 20px;
 
 	}
 
 }
+

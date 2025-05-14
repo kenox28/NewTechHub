@@ -16,6 +16,7 @@ if (!isset($_SESSION['userid'])) {
 	<link rel="stylesheet" href="../css_techbook/EditProfile.css?v=1.0.4" />
 	<link rel="stylesheet" href="../css_techbook/header.css?v=1.0.5" />
 	<link rel="stylesheet" href="../css_techbook/1.css?v=1.0.4" />
+	<link rel="stylesheet" href="../css_techbook/feedback&report.css">
 	<link
 		rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
