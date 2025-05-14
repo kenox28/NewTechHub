@@ -2257,8 +2257,19 @@ input::placeholder {
 		height: 70px;
 		left: 0;
 		transition: top 0.3s ease-in-out;
+		z-index: 2;
 
 	}
+
+	#divshow{
+		z-index: 3;
+		/* border: solid 2px white; */
+	}
+
+	.activeuser{
+		z-index: 1;
+	}
+
 	#listheader1 {
 		background-color: lightgray;
 		position: fixed;
@@ -2320,6 +2331,7 @@ input::placeholder {
 		top: 70px;
 		left: 0;
 		border-radius: 0px;
+		z-index: 1;
 
 	  }
 
@@ -2386,6 +2398,8 @@ input::placeholder {
 	.divbutton .btn{
 		margin-right: 100px;
 	}
+
+
 }
 
 /* Additional adjustments for very small screens */

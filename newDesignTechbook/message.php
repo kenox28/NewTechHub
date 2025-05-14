@@ -29,7 +29,7 @@ if (!isset($_SESSION['userid'])) {
 
     <body>
 
-        <?php include "header.php"?>
+        <?php include "header.php"?>    
         <main>
             <div id="reportmessage">
                     <div id="btnforx">
