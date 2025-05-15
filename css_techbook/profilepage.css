@@ -2048,3 +2048,218 @@ label {
     100% { transform: scale(1); }
 }
 
+
+
+@media screen and (max-width: 768px) {
+	body {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		scrollbar-width: 0;
+		width: 100%;
+		/* border: solid 2px red; */
+	}
+
+	/* Para sa header */
+	header{
+		top: 0;
+		position: fixed;
+		width: 100%;
+		height: 70px;
+		left: 0;
+		transition: top 0.3s ease-in-out;
+		z-index: 2;
+		/* border: solid 2px white; */
+
+	}
+
+	#divshow{
+		z-index: 3;
+		/* border: solid 2px white; */
+	}
+
+	.activeuser{
+		z-index: 1;
+	}
+
+	#listheader1 {
+		background-color: lightgray;
+		position: fixed;
+		top: 93vh;
+		bottom: 0px;
+		height: 60px;
+		width: 100%;
+		border-radius: 1rem 1rem 0px 0px;
+		border-top: solid 1px white;
+		z-index: 9999;
+		box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
+		-webkit-box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
+		-moz-box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
+	}
+
+
+	#listheader2 {
+		height: 50px;
+		width: 70%;
+		position: fixed;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		/* border: solid 2px white; */
+
+	}
+
+	.search3{
+		width: 90%;
+		height: 500px;
+	}
+
+	/* G sudlan sa mga navigation bar */
+	form .container {
+		height: 50px;
+		width: 280px;
+		/* border: solid 2px green; */
+
+	}
+
+	.searchuserA{
+		width: 80%;
+		height: 300px;
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		border-radius: 10px;
+		/* border: solid 2px white; */
+	}
+
+	.searchuserA .showname{
+		display: block;
+		align-items: center;
+		width: 100%;
+		height: 50px;
+		/* border: solid 2px white; */
+	}
+
+	.searchuserA .actname{
+		/* border: solid 2px white; */
+		width: 100%;
+	}
+
+	.searchuserA .showprofile{
+		margin-left: 20px;
+
+	}
+
+
+	/* Pag tanggal sa image */
+	#logo img {
+		display: none;
+	  }
+
+	  .box1 {
+		margin-top: 100px;
+		height: 70vh;
+		/* border: solid 2px white; */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	  }
+
+	  .box2 {
+		/* border: solid 2px white; */
+		position: fixed;
+		display: flex;
+		justify-content: start;
+		align-items: center;
+		flex-direction: row;
+		height: 100px;
+		width: 100%;
+		top: 70px;
+		left: 0;
+		border-radius: 0px;
+		z-index: 1;
+
+	  }
+
+	  ::-webkit-scrollbar {
+		display: none;
+	}
+
+	.showname{
+		display: none;
+	}
+	.showstat{
+		display: none;
+	}
+	.clickuser{
+		width: 70px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: transparent !important;
+	}
+	.clickuser img{
+		background-color: transparent;
+	}
+	img .homeprofile{
+		display: none;
+	}
+
+	#rdside{
+		display: none;
+	}
+
+	#mainp{
+		width: 100%;
+		height: 700px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		/* border: solid 2px white; */
+		position: absolute;
+		top: 100px;
+	}
+
+	#postprodiv #timeline{
+		/* border: solid 2px green; */
+		height: 30px;
+		width: 95%;
+		position: absolute;
+		top: 450px;
+		z-index: 1;
+		
+
+	}
+
+	#sidep{
+		/* border: solid 2px violet; */
+		height: 400px;
+		width: 90%;
+		z-index: 1;
+	}
+
+	#reportmessage{
+		/* border: solid 2px pink; */
+	}
+
+	#postprodiv{
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		/* border: solid 2px yellow; */
+	}
+
+	#infop{
+		/* border: solid 2px gray; */
+		width: 90%;
+		height: 150px;
+		z-index: 1;
+	}
+}
