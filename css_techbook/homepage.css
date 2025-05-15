@@ -2261,6 +2261,13 @@ input::placeholder {
 		z-index: 2;
 
 	}
+	#postfeed input{
+		width:95%;
+	}
+	#postfeed .divbutton{
+		width: 100%;
+	}
+
 
 	#divshow{
 		z-index: 3;

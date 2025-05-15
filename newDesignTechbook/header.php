@@ -2,7 +2,7 @@
     <?php include "../newPhpfileTechhub/headerfetechdata.php" ?>
     <h1 id="logo"><img src="../profileimage/techhubBLACK.png" height="40px" style="padding: 2px;"></h1>
     <div id="listheader2">
-        <form action="">
+        <form action="" id="searchform">
             <div class="container">
                 <input
                     required=""
