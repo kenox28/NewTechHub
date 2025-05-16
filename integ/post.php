@@ -1,4 +1,5 @@
 <?php
+session_start();
 $host = "localhost";
 $dbname = "progbook";
 $username = "root";
@@ -44,13 +45,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             "directory" => "/profileimage/"
         ]);
         exit;
-    } else {
-        echo json_encode([
-            "status" => "error",
-            "message" => "Invalid action."
-        ]);
+    } 
+
+    if (isset($_POST["action"]) && $_POST["action"] === "current_user") {
+        $get_user = "SELECT * FROM account WHERE userid = {$_SESSION['userid']}";
+
+        $stmt = $pdo->prepare($get_user);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            echo json_encode([
+                "status" => "error",
+                "message" => "no user found."
+            ]);
+            exit;
+        }
+        $response = [
+            "status" => "success",
+            "message" => "user(s) found.",
+            "user" => $result,
+            "directory" => "/profileimage/"
+        ];
+        echo json_encode($response);
         exit;
     }
+    
+    // else {
+    //     echo json_encode([
+    //         "status" => "error",
+    //         "message" => "Invalid action."
+    //     ]);
+    //     exit;
+    // }
 } else {
     echo json_encode([
         "status" => "error",

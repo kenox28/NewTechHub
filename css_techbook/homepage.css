@@ -5,7 +5,7 @@
 	color: #bdbdbd;
 	text-shadow: -1px 5px 8px rgba(0, 0, 0, 1);
 	font-family: sans-serif;
-	/* font-weight: 600; */
+	font-weight: 600;
 }
 body {
 	display: flex;
@@ -53,14 +53,12 @@ header {
 		#a4eae5,
 		#b4f4ef
 	);
-	/* background: #4e9a8e; */
 	box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
 		-1px -1px 6px rgba(255, 255, 255, 0.4);
 	align-items: center;
 
 	justify-content: space-between;
 	display: flex;
-	/* border: 1px solid rgb(4, 255, 42); */
 }
 main {
 	height: 600px;
@@ -316,12 +314,12 @@ a {
 	height: 280px;
 	background-color: transparent;
 	width: 150px;
-	position: fixed;      /* Use fixed for top-level stacking */
+	position: fixed; /* Use fixed for top-level stacking */
 	right: 1px;
 	top: 75px;
 	display: none;
 	border-radius: 10px;
-	z-index: 9999;        /* Highest z-index on your site */
+	z-index: 9999; /* Highest z-index on your site */
 	gap: 10px;
 }
 #homeprofile {
@@ -2252,7 +2250,6 @@ input::placeholder {
 }
 /* Existing styles remain the same until media queries */
 
-
 @media screen and (max-width: 768px) {
 	body {
 		height: 100vh;
@@ -2265,7 +2262,7 @@ input::placeholder {
 	}
 
 	/* Para sa header */
-	header{
+	header {
 		top: 0;
 		position: fixed;
 		width: 100%;
@@ -2273,15 +2270,14 @@ input::placeholder {
 		left: 0;
 		transition: top 0.3s ease-in-out;
 		z-index: 2;
-
 	}
 
-	#divshow{
+	#divshow {
 		z-index: 3;
 		/* border: solid 2px white; */
 	}
 
-	.activeuser{
+	.activeuser {
 		z-index: 1;
 	}
 
@@ -2295,11 +2291,10 @@ input::placeholder {
 		border-radius: 1rem 1rem 0px 0px;
 		border-top: solid 1px white;
 		z-index: 9999;
-		box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
-		-webkit-box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
-		-moz-box-shadow: 1px -12px 5px -6px rgba(255,255,255,0.75);
+		box-shadow: 1px -12px 5px -6px rgba(255, 255, 255, 0.75);
+		-webkit-box-shadow: 1px -12px 5px -6px rgba(255, 255, 255, 0.75);
+		-moz-box-shadow: 1px -12px 5px -6px rgba(255, 255, 255, 0.75);
 	}
-
 
 	#listheader2 {
 		height: 50px;
@@ -2310,10 +2305,9 @@ input::placeholder {
 		align-items: center;
 		flex-direction: column;
 		/* border: solid 2px white; */
-
 	}
 
-	.search3{
+	.search3 {
 		width: 90%;
 		height: 500px;
 	}
@@ -2323,10 +2317,9 @@ input::placeholder {
 		height: 50px;
 		width: 280px;
 		/* border: solid 2px green; */
-
 	}
 
-	.searchuserA{
+	.searchuserA {
 		width: 80%;
 		height: 300px;
 		display: flex;
@@ -2336,7 +2329,7 @@ input::placeholder {
 		/* border: solid 2px white; */
 	}
 
-	.searchuserA .showname{
+	.searchuserA .showname {
 		display: block;
 		align-items: center;
 		width: 100%;
@@ -2344,23 +2337,21 @@ input::placeholder {
 		/* border: solid 2px white; */
 	}
 
-	.searchuserA .actname{
+	.searchuserA .actname {
 		/* border: solid 2px white; */
 		width: 100%;
 	}
 
-	.searchuserA .showprofile{
+	.searchuserA .showprofile {
 		margin-left: 20px;
-
 	}
-
 
 	/* Pag tanggal sa image */
 	#logo img {
 		display: none;
-	  }
+	}
 
-	  .box1 {
+	.box1 {
 		margin-top: 100px;
 		height: 70vh;
 		/* border: solid 2px white; */
@@ -2368,9 +2359,9 @@ input::placeholder {
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-	  }
+	}
 
-	  .box2 {
+	.box2 {
 		/* border: solid 2px white; */
 		position: fixed;
 		display: flex;
@@ -2383,70 +2374,67 @@ input::placeholder {
 		left: 0;
 		border-radius: 0px;
 		z-index: 1;
+	}
 
-	  }
-
-	  ::-webkit-scrollbar {
+	::-webkit-scrollbar {
 		display: none;
 	}
 
-	.showname{
+	.showname {
 		display: none;
 	}
-	.showstat{
+	.showstat {
 		display: none;
 	}
-	.clickuser{
+	.clickuser {
 		width: 70px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		background-color: transparent !important;
 	}
-	.clickuser img{
+	.clickuser img {
 		background-color: transparent;
 	}
-	img .homeprofile{
+	img .homeprofile {
 		display: none;
 	}
 
-	#rdside{
+	#rdside {
 		display: none;
 	}
 
-	main{
+	main {
 		flex-direction: column-reverse;
 		height: auto;
 		width: 100%;
 	}
 
-	#allpost{
+	#allpost {
 		/* border: solid 2px white; */
 		margin-top: 5%;
-
 	}
 
-	.postfeed{
+	.postfeed {
 		/* border: solid 2px white; */
 		width: 100%;
 		display: flex;
 		justify-content: start;
 	}
 
-	.postfeed .container{
+	.postfeed .container {
 		width: 100%;
 		height: 100%;
 		display: flex;
-
 	}
 
-	.divbutton{
+	.divbutton {
 		/* border: solid 2px white; */
 		display: flex;
 		justify-content: center;
 	}
 
-	.divbutton .btn{
+	.divbutton .btn {
 		margin-right: 100px;
 	}
 
@@ -2456,24 +2444,17 @@ input::placeholder {
 		height: 300px;
 		border: solid 2px white;
 	} */
-
-
-
-
-
 }
 
 /* Additional adjustments for very small screens */
 @media screen and (max-width: 320px) {
 	@media screen and (max-width: 320px) {
-
-		body{
+		body {
 			overflow: scroll;
 			scrollbar-width: none;
 			overflow-y: hidden;
 		}
 
-	
 		/* header {
 			width: 100%;
 			height: auto;
@@ -2537,9 +2518,9 @@ input::placeholder {
 			padding: 5px;
 			font-size: 0.9rem;
 		}
-*/			
-	}	
+*/
 	}
+}
 
 /* #GameDiv {
 	border: 1px solid #ccc;
