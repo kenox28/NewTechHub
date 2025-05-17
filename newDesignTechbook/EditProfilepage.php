@@ -271,5 +271,5 @@ if (!isset($_SESSION['userid'])) {
 	</body>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-	<script src="../techHUB_Javascripts/editprofile.js"></script>
+	<script src="../techHUB_Javascripts/editprofile.js?v=1.0.2"></script>
 </html>

@@ -66,10 +66,14 @@ if (!$result4) {
     die("Error in SQL4: " . mysqli_error($connect));
 }
 
-if ($result && $result2 && $result3 && $result4) {
-    // echo "Profile updated successfully.";
-    // header("Location: ../newDesignTechbook/Profilepage.php");
-    echo "success";
+if ($result) {
+    echo json_encode([
+        "status" => "success",
+        "userid" => $_SESSION['userid']
+    ]);
 } else {
-    // echo mysqli_error($connect);
+    echo json_encode([
+        "status" => "error",
+        "message" => "Failed to update profile."
+    ]);
 }   
