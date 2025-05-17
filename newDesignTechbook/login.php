@@ -263,11 +263,6 @@ if (isset($_SESSION['userid'])) {
 							class="input" />
 						<label class="label">Password</label>
 					</div>
-					<div class="container" id="otpSection" style="display: none;">
-						<input required="" type="text" name="otp" id="otp" class="input" maxlength="6" pattern="[0-9]{6}" />
-						<label class="label">OTP Code</label>
-
-					</div>
 				</div>
 				
 

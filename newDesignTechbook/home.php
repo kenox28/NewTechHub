@@ -105,7 +105,7 @@ header("Access-Control-Allow-Origin: *");
                 <i id="iside" class="fa-solid fa-message"></i>
                 <i class="animation"></i>REPORT<i class="animation"></i>
             </a>
-            <a id="sidebtnGameid" class="btn1" class="a">
+            <a id="#" class="btn1" class="a" href="spellable.php?userid=<?php echo $_SESSION['userid']; ?>">
                 <i id="iside" class="fa-solid fa-address-card"></i>
                 <i class="animation"></i>Game<i class="animation"></i>
             </a>
@@ -158,12 +158,15 @@ header("Access-Control-Allow-Origin: *");
         </div>
     </main>
 </body>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://c61a-158-62-51-63.ngrok-free.app/spellable/js/spellable.js?v=1.0.1"></script>
+<script src="http://192.168.1.12/spellable/js/spellable_cms.js"></script>
 <script>
     const game = new WordQuizApp()
+
+    game.user_init()
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 <script src="../techHUB_Javascripts/home.js?v=1.0.1"></script>
 
 

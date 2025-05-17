@@ -92,20 +92,41 @@ const EditForm = document.querySelector("#EditForm");
 EditForm.onsubmit = function (e) {
 	e.preventDefault();
 };
-saveEdit.onclick = function (e) {
+saveEdit.onclick = async function (e) {
 	e.preventDefault();
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", "../newPhpfileTechhub/Edit.php", true);
-	xhr.onload = function () {
-		if (xhr.readyState === XMLHttpRequest.DONE) {
-			if (xhr.status === 200) {
-				let data = xhr.response;
-				console.log(data);
-			}
-		}
-	};
-	let formdatainputed = new FormData(EditForm);
-	xhr.send(formdatainputed);
+	const response = await fetch("../newPhpfileTechhub/Edit.php", {
+		method: "POST",
+		body: new FormData(EditForm),
+	});
+	const result = await response.json();
+	console.log(result);
+	if (result.status === "success") {
+		window.location.href =
+			"../newDesignTechbook/EditProfilepage.php?userid=" + result.userid;
+	} else {
+		swal({
+			title: "Error!",
+			text: "Failed to update profile.",
+			icon: "error",
+			button: "Close",
+		});
+	}
+	// let xhr = new XMLHttpRequest();
+	// xhr.open("POST", "../newPhpfileTechhub/Edit.php", true);
+	// xhr.onload = function () {
+	// 	if (xhr.readyState === XMLHttpRequest.DONE) {
+	// 		if (xhr.status === 200) {
+	// 			let data = xhr.response;
+	// 			console.log(data);
+	// 			if (data === "success") {
+	// 				window.location.href =
+	// 					"../newDesignTechbook/EditProfilepage.php?userid=<?php  echo $_SESSION['userid']; ?>";
+	// 			}
+	// 		}
+	// 	}
+	// };
+	// let formdatainputed = new FormData(EditForm);
+	// xhr.send(formdatainputed);
 };
 
 const logout = document.querySelector("#logout");

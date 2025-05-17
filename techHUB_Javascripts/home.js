@@ -12,7 +12,7 @@ async function Addpost() {
 	const form = document.getElementById("postfeed");
 	const formdata = new FormData(form);
 
-	const res = await fetch("../newphpfiletechhub/postcode.php", {
+	const res = await fetch("../newphpfiletechhub/postcode2.php", {
 		method: "POST",
 		body: formdata,
 	});
@@ -67,9 +67,15 @@ async function showpost() {
                     </div>
                     <div class="Postcaption">
                         <p id="Postcaption">${u.cappost}</p>
-                    </div>${
+                    </div>
+                    ${
 											u.imgpost
 												? `<div class="postpic"><img src="../profileimage/${u.imgpost}" alt="" id="postpic" /></div>`
+												: ""
+										}
+                    ${
+											u.videopost
+												? `<div class="postvideo"><video controls src="../SRCVIDEO/${u.videopost}" id="postvideo"></video></div>`
 												: ""
 										}
                     <div class="like-section">
@@ -92,8 +98,7 @@ async function showpost() {
 			}</p>
                     </div>
                 </div>
-            
-				`;
+            `;
 		}
 		document.getElementById("allPOST").innerHTML += posts; // Append new posts
 		offset += limit; // Update offset for next fetch
