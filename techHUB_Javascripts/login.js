@@ -34,106 +34,46 @@ btn.onclick = function send(e) {
 	e.preventDefault();
 	const username = document.querySelector("#username").value;
 	const passsword = document.querySelector("#passsword").value;
-	const otpSection = document.querySelector("#otpSection");
-	const otpInput = document.querySelector("#otp");
-	const passwordContainer = document.querySelector("#passsword").parentElement;
 
-	// If OTP section is not visible, verify credentials and send OTP
-	if (otpSection.style.display === "none") {
-		let xhr = new XMLHttpRequest();
-		xhr.open("POST", "../newPhpfileTechhub/loginValidation.php", true);
-		xhr.onload = function () {
-			if (xhr.readyState === XMLHttpRequest.DONE) {
-				if (xhr.status === 200) {
-					try {
-						let response = JSON.parse(xhr.response);
-						if (response.status === "credentials_valid") {
-							otpSection.style.display = "block";
-							passwordContainer.style.display = "none"; // Hide password input
-							btn.innerHTML =
-								'<i class="animation"></i>VERIFY OTP<i class="animation"></i>';
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", "../newPhpfileTechhub/loginValidation.php", true);
+	xhr.onload = function () {
+		if (xhr.readyState === XMLHttpRequest.DONE) {
+			if (xhr.status === 200) {
+				try {
+					let response = JSON.parse(xhr.response);
+					if (response.status === "success") {
+						if (response.role === "admin") {
+							location.href = "../admin/views/homepage.php";
 						} else {
-							swal({
-								title: "Login Failed!",
-								text:
-									response.message ||
-									"Invalid email or password. Please try again.",
-								icon: "error",
-								button: "OK",
-							});
+							location.href = "../newDesignTechbook/home.php";
 						}
-					} catch (e) {
+					} else {
 						swal({
-							title: "Error!",
-							text: "An error occurred. Please try again.",
+							title: "Login Failed!",
+							text:
+								response.message ||
+								"Invalid email or password. Please try again.",
 							icon: "error",
 							button: "OK",
 						});
 					}
+				} catch (e) {
+					swal({
+						title: "Error!",
+						text: "An error occurred. Please try again.",
+						icon: "error",
+						button: "OK",
+					});
 				}
 			}
-		};
-		let formData = new FormData();
-		formData.append("email", username);
-		formData.append("password", passsword);
-		formData.append("action", "verify_credentials");
-		xhr.send(formData);
-	} else {
-		if (!otpInput.value) {
-			swal({
-				title: "Error!",
-				text: "Please enter the OTP code",
-				icon: "error",
-				button: "OK",
-			});
-			return;
 		}
-
-		let xhr = new XMLHttpRequest();
-		xhr.open("POST", "../newPhpfileTechhub/loginValidation.php", true);
-		xhr.onload = function () {
-			if (xhr.readyState === XMLHttpRequest.DONE) {
-				if (xhr.status === 200) {
-					try {
-						let response = JSON.parse(xhr.response);
-						if (response.status === "success") {
-							if (response.role === "admin") {
-								location.href = "../admin/views/homepage.php";
-							} else {
-								location.href = "../newDesignTechbook/home.php";
-							}
-						} else {
-							swal({
-								title: "Verification Failed!",
-								text: response.message || "Invalid OTP code. Please try again.",
-								icon: "error",
-								button: "OK",
-							});
-							// If OTP verification fails, show password input again and hide OTP section
-							otpSection.style.display = "none";
-							passwordContainer.style.display = "block";
-							btn.innerHTML =
-								'<i class="animation"></i>LOG IN<i class="animation"></i>';
-						}
-					} catch (e) {
-						swal({
-							title: "Error!",
-							text: "An error occurred. Please try again.",
-							icon: "error",
-							button: "OK",
-						});
-					}
-				}
-			}
-		};
-		let formData = new FormData();
-		formData.append("email", username);
-		formData.append("password", passsword);
-		formData.append("otp", otpInput.value);
-		formData.append("action", "verify_otp");
-		xhr.send(formData);
-	}
-	console.log("Raw response:", xhr.response);
+	};
+	let formData = new FormData();
+	formData.append("email", username);
+	formData.append("password", passsword);
+	formData.append("action", "login");
+	xhr.send(formData);
 };
 const forgotbuton = document.querySelector("#forgotbuton");
 const formforforgot = document.querySelector("#formforforgot");
